@@ -1,0 +1,44 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	list-style-type: none;
+}
+
+a {
+	display: inline-block;
+	text-decoration: none;
+}
+
+body {
+    height: 100vh;
+}
+
+.mineField {
+    margin: 20% auto 0;
+    width: 50%;
+    height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tile {
+    // width and height being determined by visualize grid function
+    border: 1px solid $primaryDark;
+    text-align: center;
+
+    &.hidden {
+        background: $primaryMed;
+    }
+    &.revealed {
+        background: $primaryLight;
+    }
+}
