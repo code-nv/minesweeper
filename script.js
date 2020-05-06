@@ -6,7 +6,7 @@ app.hidden = [];
 app.mines = [];
 app.warnings = [];
 app.adjacentMoveTiles = [];
-app.flagState = false
+app.flagState = false;
 
 // creates board given difficulty or dimensions
 app.createGrid = (level = "", width = 0, height = 0) => {
@@ -44,11 +44,16 @@ app.rng = (max) => {
 
 // give random squares a mine value
 app.placeMines = (mines, counter) => {
-	const makeMine = app.grid[app.rng(app.grid.length)];
-	makeMine.mine = true;
-	app.mines.push(makeMine);
-	counter++;
-	counter < mines ? app.placeMines(mines, counter) : app.checkAdjacent(app.mines, "placing");
+    const makeMine = app.grid[app.rng(app.grid.length)];
+    // accounting for rng giving doubles
+	if (makeMine.mine) {
+		app.placeMines(mines, counter);
+	} else {
+		makeMine.mine = true;
+		app.mines.push(makeMine);
+		counter++;
+		counter < mines ? app.placeMines(mines, counter) : app.checkAdjacent(app.mines, "placing");
+	}
 };
 
 // useful for finding adjacent tiles
@@ -63,17 +68,17 @@ app.difference = (a, b, c) => {
 app.makeMove = (current) => {
 	const adjacentTiles = [...current];
 	adjacentTiles.forEach((tile) => {
-        // check posisition
-        tile = tile.pos.toString();
-        // give revealed property
-        tile.revealed = true;
-        // target tile
-        const change = document.querySelectorAll(`[data-position="${tile}"]`);
-        // reveal
+		// check posisition
+		tile = tile.pos.toString();
+		// give revealed property
+		tile.revealed = true;
+		// target tile
+		const change = document.querySelectorAll(`[data-position="${tile}"]`);
+		// reveal
 		change[0].classList.add("revealed");
 		change[0].classList.remove("hidden");
 	});
-// looks at adjacent
+	// looks at adjacent
 	app.checkAdjacent(current, "playing");
 	console.log(current, "next moves");
 };
@@ -81,24 +86,24 @@ app.makeMove = (current) => {
 // when purpose is 'placing' this function tells tiles neighbouring mines that they're neighbouring mines, and gives them the number of mines.
 // when playing, it will execute different tile states based on that tile's attributes
 app.checkAdjacent = (current, purpose = "playing") => {
-    // empty array because it will be filled with adjacent tiles of this adjacent tile
+	// empty array because it will be filled with adjacent tiles of this adjacent tile
 	app.adjacentMoveTiles = [];
-    current.adjacentMines = 0
 	current.forEach((mine) => {
 		const subMine = mine;
 		app.grid.forEach((tile) => {
-            // ensuring only looking at adjacent tiles
+			// ensuring only looking at adjacent tiles
 			const tilePosition = tile.pos.toString();
 			const change = document.querySelectorAll(`[data-position="${tilePosition}"]`);
 			const xDiff = app.difference(tile.pos, subMine.pos, 0);
 			const yDiff = app.difference(tile.pos, subMine.pos, 1);
 			if (xDiff < 2 && yDiff < 2) {
-                purpose == "placing" ? tile.adjacentMines++ : null
+				purpose == "placing" ? tile.adjacentMines++ : null;
 				if (!tile.mine && !tile.warning && purpose == "placing") {
 					tile.warning = true;
-                    app.warnings.push(tile);
-                }
-                // double checking that the tile hasn't reached its endstate
+					app.warnings.push(tile);
+					console.log(app.warnings);
+				}
+				// double checking that the tile hasn't reached its endstate
 				if (!tile.done) {
 					// if an unrevealed warning, display warning
 					if (purpose == "playing" && tile.warning && !tile.revealed) {
@@ -106,8 +111,8 @@ app.checkAdjacent = (current, purpose = "playing") => {
 						tile.revealed = true;
 						change[0].classList.add("warning");
 						change[0].classList.add("revealed");
-                        change[0].classList.remove("hidden");
-                        change[0].innerHTML = tile.adjacentMines
+						change[0].classList.remove("hidden");
+						change[0].innerHTML = tile.adjacentMines;
 						app.adjacentMoveTiles.push(tile);
 						// if clicked displayed warning
 					}
@@ -154,35 +159,37 @@ app.visualizeGrid = () => {
 		});
 		// app.updateTile(e.target, targetTile);
 		const checkWarning = [e.target.classList];
-        const checkWarningMod = checkWarning.join("").toString();
+		const checkWarningMod = checkWarning.join("").toString();
 		if (checkWarningMod.includes("warning") && checkWarningMod.includes("revealed")) {
 			targetTile[0].revealed = true;
 			targetTile[0].done = true;
 			e.target.classList.remove("hidden");
 			e.target.classList.remove("warning");
-            e.target.classList.add("revealed");
-            e.target.innerHTML = ""
-          } if (app.flagState){
-            e.target.style.background = "beige"
-            e.target.innerHTML = "🚩"
-            return
-        } else if (targetTile[0].mine){
-            e.target.classList.add("red");
-            return
-        }
+			e.target.classList.add("revealed");
+			e.target.innerHTML = "";
+		}
+		if (app.flagState) {
+			e.target.style.background = "beige";
+			e.target.innerHTML = "🚩";
+			return;
+		} else if (targetTile[0].mine) {
+			e.target.classList.add("red");
+			return;
+		}
 		app.makeMove(targetTile);
 	});
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-	app.createGrid("normal", 10, 10);
-	app.placeMines(30, 0);
+	app.createGrid("normal", 16, 11);
+	app.placeMines(40, 0);
     app.visualizeGrid();
+    // stop adjacent function at warnings!
 
-    const flagButton = document.querySelector('.flag')
-    flagButton.addEventListener('click',()=>{
-        app.flagState = !app.flagState
-        console.log(app.flagState)
-app.flagState ? flagButton.style.background = "yellow" : flagButton.style.background = "red"
-    })
+	const flagButton = document.querySelector(".flag");
+	flagButton.addEventListener("click", () => {
+		app.flagState = !app.flagState;
+		console.log(app.flagState);
+		app.flagState ? (flagButton.style.background = "yellow") : (flagButton.style.background = "red");
+	});
 });
