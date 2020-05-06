@@ -264,6 +264,16 @@ body {
   height: 100vh;
 }
 
+button {
+  position: absolute;
+  top: 24%;
+  left: 25%;
+  background: red;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .mineField {
   margin: 20% auto 0;
   width: 50%;
@@ -286,4 +296,12 @@ body {
 
 .tile.revealed {
   background: #709B6B;
+}
+
+.tile.warning {
+  background: #E4A436;
+}
+
+.tile.red {
+  background: red;
 }
