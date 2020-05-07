@@ -10,6 +10,8 @@ app.flagState = false;
 
 // creates board given difficulty or dimensions
 app.createGrid = (level = "", width = 0, height = 0) => {
+	app.grid.width = width;
+	app.grid.height = height;
 	app.grid.tileWidth = 100 / width;
 	app.grid.tileHeight = 100 / height;
 	const totalTiles = width * height;
@@ -24,7 +26,6 @@ app.createGrid = (level = "", width = 0, height = 0) => {
 			flag: false,
 			warning: false,
 			revealed: false,
-			revealedWarning: false,
 			done: false,
 		};
 		xPos++;
@@ -34,7 +35,7 @@ app.createGrid = (level = "", width = 0, height = 0) => {
 		}
 		app.hidden.push(app.grid[i]);
 	}
-	console.log(app.grid, app.hidden, app.mines);
+	console.log(app.grid);
 };
 
 // random number generator
@@ -44,8 +45,8 @@ app.rng = (max) => {
 
 // give random squares a mine value
 app.placeMines = (mines, counter) => {
-    const makeMine = app.grid[app.rng(app.grid.length)];
-    // accounting for rng giving doubles
+	const makeMine = app.grid[app.rng(app.grid.length)];
+	// accounting for rng giving doubles
 	if (makeMine.mine) {
 		app.placeMines(mines, counter);
 	} else {
@@ -69,18 +70,21 @@ app.makeMove = (current) => {
 	const adjacentTiles = [...current];
 	adjacentTiles.forEach((tile) => {
 		// check posisition
-		tile = tile.pos.toString();
+		tilePos = tile.pos.toString();
 		// give revealed property
 		tile.revealed = true;
 		// target tile
-		const change = document.querySelectorAll(`[data-position="${tile}"]`);
-		// reveal
+		const change = document.querySelectorAll(`[data-position="${tilePos}"]`);
+		// reveal tile clicked
 		change[0].classList.add("revealed");
 		change[0].classList.remove("hidden");
+		// looks at adjacent
+		if (tile.warning) {
+			change[0].innerHTML = tile.adjacentMines;
+		}
 	});
-	// looks at adjacent
 	app.checkAdjacent(current, "playing");
-	console.log(current, "next moves");
+	// console.log(current, "next moves");
 };
 
 // when purpose is 'placing' this function tells tiles neighbouring mines that they're neighbouring mines, and gives them the number of mines.
@@ -96,42 +100,38 @@ app.checkAdjacent = (current, purpose = "playing") => {
 			const change = document.querySelectorAll(`[data-position="${tilePosition}"]`);
 			const xDiff = app.difference(tile.pos, subMine.pos, 0);
 			const yDiff = app.difference(tile.pos, subMine.pos, 1);
+
 			if (xDiff < 2 && yDiff < 2) {
 				purpose == "placing" ? tile.adjacentMines++ : null;
 				if (!tile.mine && !tile.warning && purpose == "placing") {
 					tile.warning = true;
 					app.warnings.push(tile);
-					console.log(app.warnings);
+					// console.log(app.warnings);
 				}
 				// double checking that the tile hasn't reached its endstate
-				if (!tile.done) {
-					// if an unrevealed warning, display warning
-					if (purpose == "playing" && tile.warning && !tile.revealed) {
-						tile.revealedWarning = true;
+				if (!tile.revealed) {
+					// reveal adjacent warnings
+					if (purpose == "playing" && tile.warning) {
 						tile.revealed = true;
-						change[0].classList.add("warning");
 						change[0].classList.add("revealed");
 						change[0].classList.remove("hidden");
 						change[0].innerHTML = tile.adjacentMines;
-						app.adjacentMoveTiles.push(tile);
-						// if clicked displayed warning
+						// app.adjacentMoveTiles.push(tile);
+						// app.makeMove(app.adjacentMoveTiles);
+
+						// warnings do not trigger neighbouring warnings
 					}
-					if (purpose == "playing" && tile.warning && tile.revealed) {
-						tile.done = true;
-						// change[0].classList.add("revealed");
-						// change[0].classList.remove("warning");
-						// change[0].classList.remove("hidden");
-						app.adjacentMoveTiles.push(tile);
-						console.log("reading properly");
-					}
-					if (purpose == "playing" && !tile.warning && !tile.revealed && !tile.mine) {
-						tile.done = true;
+					// reveal if empty
+					if (purpose == "playing" && !tile.mine && !tile.warning) {
 						tile.revealed = true;
 						change[0].classList.add("revealed");
 						change[0].classList.remove("hidden");
 						app.adjacentMoveTiles.push(tile);
+						// empty tiles trigger neighbouring tiles
 						app.makeMove(app.adjacentMoveTiles);
 					}
+				} else {
+					return;
 				}
 			}
 		});
@@ -141,14 +141,16 @@ app.checkAdjacent = (current, purpose = "playing") => {
 // display minefield
 app.visualizeGrid = () => {
 	const minefield = document.querySelector(".mineField");
+	minefield.style.width = `${app.grid.width * 30}px`;
+	minefield.style.height = `${app.grid.height * 30}px`;
 	app.grid.forEach((tile) => {
 		const htmlToAppend = `<li class="tile hidden" data-position="${tile.pos}"> ${tile.mine ? "" : ""}</li>`;
 		minefield.innerHTML += htmlToAppend;
 	});
 	const gameTiles = document.getElementsByClassName("tile");
 	for (let i = 0; i < gameTiles.length; i++) {
-		gameTiles[i].style.width = `${app.grid.tileWidth}%`;
-		gameTiles[i].style.height = `${app.grid.tileHeight}%`;
+		// gameTiles[i].style.width = `${app.grid.tileWidth}%`;
+		// 	gameTiles[i].style.height = `${app.grid.tileHeight}%`;
 	}
 
 	// tell board to listen for clicks
@@ -157,39 +159,53 @@ app.visualizeGrid = () => {
 		const targetTile = app.grid.filter((tile) => {
 			return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
 		});
-		// app.updateTile(e.target, targetTile);
-		const checkWarning = [e.target.classList];
-		const checkWarningMod = checkWarning.join("").toString();
-		if (checkWarningMod.includes("warning") && checkWarningMod.includes("revealed")) {
-			targetTile[0].revealed = true;
-			targetTile[0].done = true;
-			e.target.classList.remove("hidden");
-			e.target.classList.remove("warning");
-			e.target.classList.add("revealed");
-			e.target.innerHTML = "";
+		if (checkTile(e, targetTile)) {
+			app.makeMove(targetTile);
 		}
-		if (app.flagState) {
-			e.target.style.background = "beige";
-			e.target.innerHTML = "🚩";
-			return;
-		} else if (targetTile[0].mine) {
-			e.target.classList.add("red");
-			return;
-		}
-		app.makeMove(targetTile);
 	});
 };
 
+
+// determine what kind of tile has been clicked and what to do next
+const checkTile = (e, targetTile) => {
+	const checkTile = [...e.target.classList];
+
+	if (checkTile.join(" ").includes("revealed") || checkTile.join(" ").includes("flagged")) {
+		console.log("already revealed / flagged");
+		return false;
+	}
+	if (app.flagState) {
+		if (checkTile.join(" ").includes("flagged")) {
+			e.target.innerHTML = "";
+			e.target.classList.remove("flagged");
+			return false;
+		} else {
+			e.target.classList.add("flagged");
+			e.target.innerHTML = "🚩";
+			return false;
+		}
+	} else if (targetTile[0].mine) {
+		e.target.classList.add("red");
+		return false;
+	} else {
+		return true;
+	}
+};
+
 document.addEventListener("DOMContentLoaded", function () {
-	app.createGrid("normal", 16, 11);
-	app.placeMines(40, 0);
-    app.visualizeGrid();
-    // stop adjacent function at warnings!
+	app.createGrid("normal", 20, 15);
+	app.placeMines(45, 0);
+	app.visualizeGrid();
+	// stop adjacent function at warnings!
 
 	const flagButton = document.querySelector(".flag");
 	flagButton.addEventListener("click", () => {
 		app.flagState = !app.flagState;
-		console.log(app.flagState);
-		app.flagState ? (flagButton.style.background = "yellow") : (flagButton.style.background = "red");
+		app.flagState ? flagButton.classList.add("active") : flagButton.classList.remove("active");
 	});
 });
+
+// if a tile has a flag on it, don't reveal via adjacent.
+// if click on a mine, end game
+// if all tiles revealed !mine and all tiles !revealed are mine, win
+// prevent tiles from being revealed diagonally

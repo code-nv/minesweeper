@@ -264,20 +264,51 @@ body {
   height: 100vh;
 }
 
-button {
-  position: absolute;
-  top: 24%;
-  left: 25%;
-  background: red;
+.wrapper {
+  width: 80%;
+  max-width: 1200px;
+  margin: 2% auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+aside {
+  width: 20%;
+}
+
+main {
+  width: 80%;
+}
+
+.gameContainer {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 5% auto;
+  padding: 10px;
+  background: #709B6B;
+}
+
+.flag {
+  background: #d3d2d2;
+  -webkit-box-shadow: inset 0 -5px 4px grey;
+          box-shadow: inset 0 -5px 4px grey;
   border: none;
   padding: 5px;
   border-radius: 5px;
 }
 
+.flag.active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: skyblue;
+}
+
 .mineField {
-  margin: 20% auto 0;
-  width: 50%;
-  height: 50vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -286,6 +317,8 @@ button {
 }
 
 .tile {
+  width: 30px;
+  height: 30px;
   border: 1px solid #1F1F1F;
   text-align: center;
 }
@@ -300,6 +333,10 @@ button {
 
 .tile.warning {
   background: #E4A436;
+}
+
+.tile.flagged {
+  background: beige;
 }
 
 .tile.red {

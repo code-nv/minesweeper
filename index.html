@@ -10,15 +10,28 @@
 		<link rel="stylesheet" href="./styles/style.css" />
 	</head>
 	<body>
-		<header></header>
-		<main>
-            <section class="gameContainer">
-                <button class="flag">flag</button>
-                <ul class="mineField">
-
-                </ul>
-            </section>
-        </main>
+		<header>
+			<h1>Minesweeper</h1>
+		</header>
+		<div class="wrapper">
+			<aside>
+				<h2>how to play</h2>
+				<ol>
+                    <li>the grid contains a random number of mines.</li>
+                    <li>Clicking a tile will reveal what's hiding underneath.</li>
+                    <li>If a tile is adjacent to a mine, it will display how many mines it is adjacent to.</li>
+                    <li>If the tile is not adjacent to any mines, it will reveal all of its adjacent tiles until the revealed tiles are adjacent to mines.</li>
+                    <li>You can mark tiles believed to be mines by toggling a flag. Flagged tiles will not reveal themselves and will be protected from accidental clicks.</li>
+                    <li>The game ends when all safe tiles have been revealed.</li>
+				</ol>
+			</aside>
+			<main>
+				<section class="gameContainer">
+					<button class="flag">flag</button>
+					<ul class="mineField"></ul>
+				</section>
+			</main>
+		</div>
 		<footer></footer>
 
 		<script src="script.js"></script>
