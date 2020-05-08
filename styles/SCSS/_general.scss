@@ -5,7 +5,8 @@ h4,
 h5,
 h6,
 ul,
-ol {
+ol,
+p {
 	margin: 0;
 	padding: 0;
 }
@@ -19,67 +20,31 @@ a {
 }
 
 body {
-    height: 100vh;
+	height: 100vh;
+	font-family: sans-serif;
+	background: $primaryMed;
+	font-size: 62.5%;
 }
 
 .wrapper {
-    width: 80%;
-    max-width: 1200px;
-    margin: 2% auto;
-    display: flex;
-}
-
-aside {
-    width: 20%;
+	width: 80%;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
 }
 main {
-    width: 80%;
+	width: 100%;
 }
 
-.gameContainer {
-    width: fit-content;
-    height: fit-content;
-    margin: 5% auto;
-    padding: 10px;
-    background: $primaryLight;
-}
-.flag {
-    background: rgb(211, 210, 210);
-    box-shadow: inset 0 -5px 4px grey;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-
-    &.active {
-        box-shadow: none;
-        background: skyblue;
-    }
-}
-.mineField {
-    display: flex;
-    flex-wrap: wrap;
+h1 {
+	text-align: center;
+	width: 20%;
+	margin: 7vh 0 3vh;
+	font-size: 2rem;
+	color: $mainFont;
 }
 
-.tile {
-    width: 30px;
-    height: 30px;
-    border: 1px solid $primaryDark;
-    text-align: center;
-
-    &.hidden {
-        background: $primaryMed;
-    }
-    &.revealed {
-        background: $primaryLight;
-    }
-    &.warning {
-        background: $accentOne;
-    }
-    &.flagged {
-        background: beige;
-    }
-    &.red {
-        background: red;
-    }
+header {
+	background: $primaryMed;
 }
 

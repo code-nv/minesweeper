@@ -1,0 +1,99 @@
+.gameContainer {
+	width: fit-content;
+	height: fit-content;
+	margin: 0 auto;
+	padding: 10px;
+	border-radius: 5px;
+	background: $primaryMed;
+	font-size: 1rem;
+	box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
+}
+.controls {
+	@include flexRow(center);
+	text-transform: capitalize;
+	.container {
+		width: 60px;
+		text-align: center;
+		color: $mainFont;
+		.number {
+			color: $primaryDark;
+			padding: 5px;
+			margin-bottom: 5px;
+			border-radius: 5px;
+			background: $primaryLight;
+			box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+			border: 1px solid darken($primaryLight, 10%);
+		}
+	}
+}
+
+.flag {
+	width: 60px;
+	margin: 0 30px;
+	align-self: stretch;
+}
+
+.stats {
+	width: 50%;
+}
+
+button.nav {
+	background: $primaryMed;
+	color: $mainFont;
+	box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+	border: none;
+	padding: 5px;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	text-transform: capitalize;
+
+	&.active {
+		background: $primaryLight;
+		box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+		color: $primaryDark;
+	}
+}
+
+.levelSelector {
+	@include flexRow(space-between);
+	button {
+		width: 70px;
+		margin: 10px 2.5px 0;
+	}
+}
+.mineField {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 auto;
+}
+
+.tile {
+	width: 23px;
+	height: 23px;
+	margin: 1px;
+	text-align: center;
+	border-radius: 2px;
+	box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+
+	&.hidden {
+		background: $primaryMed;
+		width: 25px;
+		height: 25px;
+		margin:0;
+	}
+	&.revealed {
+		background: $primaryLight;
+		box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+	}
+	&.warning {
+		background: $accentOne;
+	}
+	&.flagged {
+		background: #c2c0b1;
+		box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
+	}
+	&.red {
+		background: #d10000;
+		box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
+	}
+}
