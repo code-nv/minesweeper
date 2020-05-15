@@ -16,9 +16,10 @@
 			</div>
 		</header>
 		<div class="wrapper">
-			<aside>
-				<h2>how to play</h2>
-				<ol>
+			<aside class="hide">
+				<!-- <h2>how to play</h2> -->
+				<button class="asideButton rulesToggle">show rules</button>
+				<ol class="howToPlay">
 					<li>The grid contains a random number of mines.</li>
 					<li>Clicking a tile will reveal what's hiding underneath.</li>
 					<li>If a tile is adjacent to a mine, it will display how many mines it is adjacent to.</li>
@@ -34,7 +35,7 @@
 				</ol>
 			</aside>
 			<main>
-				<section class="gameContainer">
+				<section class="gameContainer show">
 					<div class="controls">
 						<div class="mines container">
 							<p class="mine number"></p>

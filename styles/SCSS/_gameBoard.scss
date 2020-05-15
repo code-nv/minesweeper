@@ -1,4 +1,5 @@
 .gameContainer {
+	position: relative;
 	width: fit-content;
 	height: fit-content;
 	margin: 0 auto;
@@ -7,6 +8,19 @@
 	background: $primaryMed;
 	font-size: 1rem;
 	box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
+	opacity: 1;
+
+	&.hide {
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		
+		z-index: 1;
+	}
+	&.show {
+		opacity: 1;
+		transition: opacity 0.2s ease 0.5s;
+		z-index: 2;
+	}
 }
 .controls {
 	@include flexRow(center);
@@ -48,6 +62,12 @@ button.nav {
 	text-transform: capitalize;
 
 	&.active {
+		background: $primaryLight;
+		box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+		color: $primaryDark;
+	}
+
+	&:active {
 		background: $primaryLight;
 		box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
 		color: $primaryDark;

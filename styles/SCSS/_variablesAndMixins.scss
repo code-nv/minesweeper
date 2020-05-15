@@ -16,11 +16,12 @@ $bodyStack: "Montserrat", sans-serif;
 
 
 //mixins
-@mixin flexRow($justify: center) {
+@mixin flexRow($justify: center, $align: center, $wrap:nowrap) {
     display: flex;
     flex-direction: row;
     justify-content: $justify;
-    align-items: center;
+	align-items: $align;
+	flex-wrap: $wrap;
 }
 
 @mixin flexCol($align: center) {

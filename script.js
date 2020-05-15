@@ -162,17 +162,20 @@ app.visualizeGrid = () => {
 	}
 
 	// tell board to listen for clicks
-	document.querySelector(".mineField").addEventListener("click", (e) => {
-		const filterBy = e.target.getAttribute("data-position").split(",");
-		const targetTile = app.grid.filter((tile) => {
-			return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
-		});
-		// check special logic on each tile, if it passes call makeMove function
-		if (checkTile(e, targetTile)) {
-			app.makeMove(targetTile);
-		}
-	});
+	document.querySelector(".mineField").addEventListener("click", activeBoard);
 };
+
+// separated so I can toggle the event listener later
+const activeBoard = e => {
+	const filterBy = e.target.getAttribute("data-position").split(",");
+	const targetTile = app.grid.filter((tile) => {
+		return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
+	});
+	// check special logic on each tile, if it passes call makeMove function
+	if (checkTile(e, targetTile)) {
+		app.makeMove(targetTile);
+	}
+}
 
 // determine what kind of tile has been clicked and what to do next
 const checkTile = (e, targetTile) => {
@@ -197,16 +200,16 @@ app.markFlag = (e, targetTile) => {
 		e.target.innerHTML = "";
 		e.target.classList.remove("flagged");
 		count++;
-        document.querySelector(".mine.number").innerHTML = count;
-        targetTile[0].flag = false
+		document.querySelector(".mine.number").innerHTML = count;
+		targetTile[0].flag = false;
 		return false;
 	} else {
 		e.target.classList.add("flagged");
 		e.target.innerHTML = "🚩";
 		count--;
-        document.querySelector(".mine.number").innerHTML = count;
-        targetTile[0].flag = true
-        console.log(targetTile, app.grid)
+		document.querySelector(".mine.number").innerHTML = count;
+		targetTile[0].flag = true;
+		console.log(targetTile, app.grid);
 		return false;
 	}
 };
@@ -227,13 +230,13 @@ const gameOver = (e) => {
 	e.target.classList.remove("hidden");
 	let count = 0;
 	let minesLeft = parseInt(document.querySelector(".mine.number").innerHTML);
-    let nodeList = [];
-    const minesNotFlagged = app.grid.filter(mine=> {
-        if (mine.mine && !mine.flag) {
-            return mine
-        }
-    })
-    console.log(app.mines, minesNotFlagged)
+	let nodeList = [];
+	const minesNotFlagged = app.grid.filter((mine) => {
+		if (mine.mine && !mine.flag) {
+			return mine;
+		}
+	});
+	console.log(app.mines, minesNotFlagged);
 	minesNotFlagged.forEach((mine, i) => {
 		const minePosition = mine.pos.toString("");
 		const change = document.querySelectorAll(`[data-position="${minePosition}"]`);
@@ -250,6 +253,7 @@ const gameOver = (e) => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+	app.rulesToggle();
 	app.selectDifficulty();
 	app.createGrid(10, 10);
 	app.placeMines(10, 0);
@@ -260,13 +264,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 app.triggerRightClicks = () => {
 	document.querySelector(".mineField").addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-        const filterBy = e.target.getAttribute("data-position").split(",");
+		e.preventDefault();
+		const filterBy = e.target.getAttribute("data-position").split(",");
 		const targetTile = app.grid.filter((tile) => {
 			return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
-        });
-        console.log(targetTile[0])
-        app.markFlag(e,targetTile);
+		});
+		console.log(targetTile[0]);
+		app.markFlag(e, targetTile);
 	});
 };
 
@@ -311,3 +315,27 @@ app.resetTimer = () => {
 
 // if all tiles revealed are !mine and all tiles !revealed are mine, win
 // work on bug where right clicked flags only change back under right clicks
+
+// style related javascript
+
+app.rulesToggle = () => {
+	const rulesToggle = document.querySelector(".rulesToggle");
+	const aside = document.querySelector("aside");
+	const gameContainer = document.querySelector('.gameContainer');
+	rulesToggle.addEventListener("click", () => {
+		aside.classList.toggle("show");
+		aside.classList.toggle("hide");
+		gameContainer.classList.toggle("show");
+		gameContainer.classList.toggle("hide");
+		// rulesToggle.classList.toggle("active");
+		if (rulesToggle.innerHTML == "show rules") {
+			rulesToggle.innerHTML = "hide rules";
+			document.querySelector(".mineField").removeEventListener("click", activeBoard);
+			clearInterval(startTimer);
+		} else {
+			rulesToggle.innerHTML = "show rules";
+			document.querySelector(".mineField").addEventListener("click", activeBoard);
+			startTimer = setInterval(gameTimer, 1000);
+		}
+	});
+};

@@ -269,8 +269,9 @@ body {
 }
 
 .wrapper {
-  width: 80%;
-  max-width: 1200px;
+  position: relative;
+  width: 95%;
+  max-width: 1400px;
   margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -282,7 +283,7 @@ main {
 }
 
 h1 {
-  text-align: center;
+  text-align: left;
   width: 20%;
   margin: 7vh 0 3vh;
   font-size: 2rem;
@@ -293,28 +294,8 @@ header {
   background: #345231;
 }
 
-aside {
-  position: absolute;
-  width: 20%;
-  background: #345231;
-  padding: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: 9px 9px 14px #283e25,  -9px -9px 14px #40663d;
-          box-shadow: 9px 9px 14px #283e25,  -9px -9px 14px #40663d;
-  color: #aac5aa;
-}
-
-aside h2 {
-  font-size: 1.4rem;
-}
-
-aside ol {
-  list-style-position: inside;
-  margin-top: 10px;
-  font-size: 1.1rem;
-}
-
 .gameContainer {
+  position: relative;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -328,6 +309,21 @@ aside ol {
   font-size: 1rem;
   -webkit-box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
           box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
+  opacity: 1;
+}
+
+.gameContainer.hide {
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+
+.gameContainer.show {
+  opacity: 1;
+  -webkit-transition: opacity 0.2s ease 0.5s;
+  transition: opacity 0.2s ease 0.5s;
+  z-index: 2;
 }
 
 .controls {
@@ -344,6 +340,8 @@ aside ol {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   text-transform: capitalize;
 }
 
@@ -376,7 +374,7 @@ aside ol {
   width: 50%;
 }
 
-button.nav {
+button.nav, aside button.asideButton.rulesToggle {
   background: #345231;
   color: #aac5aa;
   -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
@@ -388,7 +386,14 @@ button.nav {
   text-transform: capitalize;
 }
 
-button.nav.active {
+button.nav.active, aside button.active.asideButton.rulesToggle {
+  background: #709B6B;
+  -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+          box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+  color: #1F1F1F;
+}
+
+button.nav:active, aside button.asideButton.rulesToggle:active {
   background: #709B6B;
   -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
           box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
@@ -409,6 +414,8 @@ button.nav.active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
 }
 
 .levelSelector button {
@@ -462,4 +469,120 @@ button.nav.active {
   background: #d10000;
   -webkit-box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
           box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
+}
+
+aside {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  position: absolute;
+  width: 22%;
+  background: #345231;
+  padding: 10px 15px;
+  left: 0;
+  border-radius: 10px;
+  -webkit-box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
+          box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
+  color: #aac5aa;
+}
+
+aside h2 {
+  font-size: 1.2rem;
+  width: 120px;
+  text-transform: capitalize;
+}
+
+aside button.asideButton.rulesToggle {
+  font-size: 1rem;
+  min-width: 75px;
+  margin-bottom: 0;
+}
+
+aside ol {
+  list-style-position: inside;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  height: auto;
+  line-height: 1.1;
+  color: #aac5aa;
+  width: 100%;
+}
+
+aside.show {
+  width: 50%;
+  -webkit-transition: width 0.5s ease 0.2s;
+  transition: width 0.5s ease 0.2s;
+  z-index: 2;
+}
+
+aside.show ol {
+  height: 290px;
+  color: #aac5aa;
+  -webkit-transition: height 0.5s ease 0.2s, color 0.2s ease 0.6s, margin-top 0.5s ease 0.2s;
+  transition: height 0.5s ease 0.2s, color 0.2s ease 0.6s, margin-top 0.5s ease 0.2s;
+}
+
+aside.hide {
+  width: 24%;
+  -webkit-transition: width 0.5s ease 0.2s;
+  transition: width 0.5s ease 0.2s;
+  z-index: 1;
+}
+
+aside.hide ol {
+  height: 0;
+  color: transparent;
+  margin-top: 0;
+  -webkit-transition: height 0.5s ease 0.2s, color 0.2s ease, margin-top 0.5s ease 0.2s;
+  transition: height 0.5s ease 0.2s, color 0.2s ease, margin-top 0.5s ease 0.2s;
+}
+
+@media (max-width: 1100px) {
+  h1 {
+    width: 100%;
+    text-align: center;
+  }
+  aside {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  aside.hide {
+    width: 140px;
+  }
+  aside h2 {
+    margin-bottom: 5px;
+  }
+  aside button {
+    margin-left: 17.5px;
+  }
+}
+
+@media (max-width: 880px) {
+  .wrapper {
+    width: 100%;
+  }
+  aside {
+    top: calc(-10vh - 2rem);
+    left: 10px;
+  }
+  aside h2 {
+    display: none;
+  }
 }
