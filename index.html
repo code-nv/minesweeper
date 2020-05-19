@@ -16,24 +16,6 @@
 			</div>
 		</header>
 		<div class="wrapper">
-			<aside class="hide">
-				<!-- <h2>how to play</h2> -->
-				<button class="asideButton rulesToggle">show rules</button>
-				<ol class="howToPlay">
-					<li>The grid contains a random number of mines.</li>
-					<li>Clicking a tile will reveal what's hiding underneath.</li>
-					<li>If a tile is adjacent to a mine, it will display how many mines it is adjacent to.</li>
-					<li>
-						If the tile is not adjacent to any mines, it will reveal all of its adjacent tiles until the revealed tiles
-						are adjacent to mines.
-					</li>
-					<li>
-						You can mark tiles believed to be mines by toggling a flag. Flagged tiles will not reveal themselves and
-						will be protected from accidental clicks.
-					</li>
-					<li>The game ends when all safe tiles have been revealed.</li>
-				</ol>
-			</aside>
 			<main>
 				<section class="gameContainer show">
 					<div class="controls">
@@ -53,7 +35,25 @@
 						<button class="difficulty medium nav" data-difficulty="14 15 40">medium</button>
 						<button class="difficulty hard nav" data-difficulty="19 25 79">hard</button>
 						<button class="difficulty expert nav" data-difficulty="expert">expert</button>
+						<button class="nav asideButton openRules">how to play</button>
 					</nav>
+				</section>
+				<section class="rulesContainer hide">
+					<button class="nav closeRules">close</button>
+					<ol class="howToPlay">
+						<li>The grid contains a random number of mines.</li>
+						<li>Clicking a tile will reveal what's hiding underneath.</li>
+						<li>If a tile is adjacent to a mine, it will display how many mines it is adjacent to.</li>
+						<li>
+							If the tile is not adjacent to any mines, it will reveal all of its adjacent tiles until the revealed tiles
+							are adjacent to mines.
+						</li>
+						<li>
+							You can mark tiles believed to be mines by toggling a flag. Flagged tiles will not reveal themselves and
+							will be protected from accidental clicks.
+						</li>
+						<li>The game ends when all safe tiles have been revealed.</li>
+					</ol>
 				</section>
 			</main>
 		</div>

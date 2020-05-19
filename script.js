@@ -166,7 +166,7 @@ app.visualizeGrid = () => {
 };
 
 // separated so I can toggle the event listener later
-const activeBoard = e => {
+const activeBoard = (e) => {
 	const filterBy = e.target.getAttribute("data-position").split(",");
 	const targetTile = app.grid.filter((tile) => {
 		return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
@@ -175,7 +175,7 @@ const activeBoard = e => {
 	if (checkTile(e, targetTile)) {
 		app.makeMove(targetTile);
 	}
-}
+};
 
 // determine what kind of tile has been clicked and what to do next
 const checkTile = (e, targetTile) => {
@@ -309,33 +309,33 @@ app.resetTimer = () => {
 	startTimer = setInterval(gameTimer, 1000);
 };
 
-// if click on a mine, end game
-// display all mines before restarting game
-// make uncovering of mines random
-
+// remove event listener after mine clicked and stop timer
 // if all tiles revealed are !mine and all tiles !revealed are mine, win
 // work on bug where right clicked flags only change back under right clicks
+// prevent flagging revealed tiles
 
 // style related javascript
 
 app.rulesToggle = () => {
-	const rulesToggle = document.querySelector(".rulesToggle");
-	const aside = document.querySelector("aside");
-	const gameContainer = document.querySelector('.gameContainer');
-	rulesToggle.addEventListener("click", () => {
-		aside.classList.toggle("show");
-		aside.classList.toggle("hide");
-		gameContainer.classList.toggle("show");
-		gameContainer.classList.toggle("hide");
-		// rulesToggle.classList.toggle("active");
-		if (rulesToggle.innerHTML == "show rules") {
-			rulesToggle.innerHTML = "hide rules";
-			document.querySelector(".mineField").removeEventListener("click", activeBoard);
-			clearInterval(startTimer);
-		} else {
-			rulesToggle.innerHTML = "show rules";
-			document.querySelector(".mineField").addEventListener("click", activeBoard);
-			startTimer = setInterval(gameTimer, 1000);
-		}
+	const openRules = document.querySelector(".openRules");
+	const closeRules = document.querySelector(".closeRules");
+	const rules = document.querySelector(".rulesContainer");
+	const gameContainer = document.querySelector(".gameContainer");
+	openRules.addEventListener("click", () => {
+		app.toggleVisibility(rules);
+		app.toggleVisibility(gameContainer);
+		document.querySelector(".mineField").removeEventListener("click", activeBoard);
+		clearInterval(startTimer);
 	});
+	closeRules.addEventListener("click", () => {
+		app.toggleVisibility(rules);
+		app.toggleVisibility(gameContainer);
+		document.querySelector(".mineField").addEventListener("click", activeBoard);
+		startTimer = setInterval(gameTimer, 1000);
+	});
+};
+
+app.toggleVisibility = (target) => {
+	target.classList.toggle("show");
+	target.classList.toggle("hide");
 };

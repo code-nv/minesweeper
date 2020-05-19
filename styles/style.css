@@ -283,8 +283,8 @@ main {
 }
 
 h1 {
-  text-align: left;
-  width: 20%;
+  text-align: center;
+  width: 100%;
   margin: 7vh 0 3vh;
   font-size: 2rem;
   color: #aac5aa;
@@ -294,35 +294,36 @@ header {
   background: #345231;
 }
 
-.gameContainer {
-  position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin: 0 auto;
+main {
   padding: 10px;
   border-radius: 5px;
   background: #345231;
   font-size: 1rem;
   -webkit-box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
           box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.gameContainer {
+  position: relative;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   opacity: 1;
 }
 
 .gameContainer.hide {
   opacity: 0;
-  -webkit-transition: opacity 0.2s ease;
-  transition: opacity 0.2s ease;
+  position: absolute;
   z-index: 1;
 }
 
 .gameContainer.show {
   opacity: 1;
-  -webkit-transition: opacity 0.2s ease 0.5s;
-  transition: opacity 0.2s ease 0.5s;
   z-index: 2;
 }
 
@@ -374,7 +375,7 @@ header {
   width: 50%;
 }
 
-button.nav, aside button.asideButton.rulesToggle {
+button.nav, .rulesContainer button.closeRules {
   background: #345231;
   color: #aac5aa;
   -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
@@ -386,14 +387,14 @@ button.nav, aside button.asideButton.rulesToggle {
   text-transform: capitalize;
 }
 
-button.nav.active, aside button.active.asideButton.rulesToggle {
+button.nav.active, .rulesContainer button.active.closeRules {
   background: #709B6B;
   -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
           box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
   color: #1F1F1F;
 }
 
-button.nav:active, aside button.asideButton.rulesToggle:active {
+button.nav:active, .rulesContainer button.closeRules:active {
   background: #709B6B;
   -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
           box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
@@ -471,7 +472,7 @@ button.nav:active, aside button.asideButton.rulesToggle:active {
           box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
 }
 
-aside {
+.rulesContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -479,74 +480,55 @@ aside {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  position: absolute;
-  width: 22%;
   background: #345231;
-  padding: 10px 15px;
-  left: 0;
-  border-radius: 10px;
-  -webkit-box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
-          box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
   color: #aac5aa;
 }
 
-aside h2 {
+.rulesContainer.show {
+  position: relative;
+  -webkit-transition: width 0.5s ease 0.2s;
+  transition: width 0.5s ease 0.2s;
+  z-index: 2;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  color: #aac5aa;
+  opacity: 1;
+}
+
+.rulesContainer.hide {
+  z-index: 1;
+  height: 0px;
+  color: transparent;
+  opacity: 0;
+  position: absolute;
+}
+
+.rulesContainer h2 {
   font-size: 1.2rem;
   width: 120px;
   text-transform: capitalize;
 }
 
-aside button.asideButton.rulesToggle {
-  font-size: 1rem;
+.rulesContainer button.closeRules {
+  font-size: 1.2rem;
   min-width: 75px;
   margin-bottom: 0;
 }
 
-aside ol {
+.rulesContainer ol {
   list-style-position: inside;
-  margin-top: 20px;
   font-size: 1.1rem;
-  height: auto;
-  line-height: 1.1;
   color: #aac5aa;
   width: 100%;
-}
-
-aside.show {
-  width: 50%;
-  -webkit-transition: width 0.5s ease 0.2s;
-  transition: width 0.5s ease 0.2s;
-  z-index: 2;
-}
-
-aside.show ol {
-  height: 290px;
-  color: #aac5aa;
-  -webkit-transition: height 0.5s ease 0.2s, color 0.2s ease 0.6s, margin-top 0.5s ease 0.2s;
-  transition: height 0.5s ease 0.2s, color 0.2s ease 0.6s, margin-top 0.5s ease 0.2s;
-}
-
-aside.hide {
-  width: 24%;
-  -webkit-transition: width 0.5s ease 0.2s;
-  transition: width 0.5s ease 0.2s;
-  z-index: 1;
-}
-
-aside.hide ol {
-  height: 0;
-  color: transparent;
-  margin-top: 0;
-  -webkit-transition: height 0.5s ease 0.2s, color 0.2s ease, margin-top 0.5s ease 0.2s;
-  transition: height 0.5s ease 0.2s, color 0.2s ease, margin-top 0.5s ease 0.2s;
 }
 
 @media (max-width: 1100px) {
