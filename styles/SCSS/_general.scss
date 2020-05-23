@@ -21,9 +21,10 @@ a {
 
 body {
 	height: 100vh;
-	font-family: sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	background: $primaryMed;
 	font-size: 62.5%;
+	font-family: $mainStack;
 }
 
 .wrapper {
@@ -43,9 +44,40 @@ h1 {
 	margin: 7vh 0 3vh;
 	font-size: 2rem;
 	color: $mainFont;
+	font-family: $mainStack;
+	font-weight: normal;
+}
+
+h2 {
+	font-family: $mainStack;
+	font-weight: normal;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 3rem;
+	text-transform: uppercase;
+	color: whitesmoke;
+	display: inline-block;
+	opacity: 0;
+	z-index: -1;
+	&.win {
+		z-index: 2;
+		cursor: default;
+		animation: winner 0.7s ease 0s 3 forwards;
+	}
+}
+
+@keyframes winner {
+	0%,
+	100% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
 }
 
 header {
 	background: $primaryMed;
 }
-

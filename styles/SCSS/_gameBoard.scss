@@ -75,6 +75,11 @@ button.nav {
 		box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
 		color: $primaryDark;
 	}
+	&[disabled="true"]{
+		background: $primaryMed;
+		color: $mainFont;
+		box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+	}
 }
 
 .levelSelector {
@@ -88,15 +93,23 @@ button.nav {
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 auto;
+
+	li {
+		margin:0;
+		padding:0;
+	}
 }
+
 
 .tile {
 	width: 23px;
 	height: 23px;
 	margin: 1px;
+	border:none;
 	text-align: center;
 	border-radius: 2px;
 	box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+	cursor: default;
 
 	&.hidden {
 		background: $primaryMed;
@@ -118,5 +131,10 @@ button.nav {
 	&.red {
 		background: #d10000;
 		box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
+	}
+
+	&:focus {
+		outline:none;
+		border: 1px dotted #94c79a;
 	}
 }

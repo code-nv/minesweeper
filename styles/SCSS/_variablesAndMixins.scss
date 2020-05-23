@@ -10,9 +10,8 @@ $background: #ECE4B7;
 $background: #709775;
 $mainFont: #aac5aa;
 
-
-$headingStack: "Abril Fatface", cursive;
-$bodyStack: "Montserrat", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+$mainStack: "Open Sans", sans-serif;
 
 
 //mixins

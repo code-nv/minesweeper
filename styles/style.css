@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -263,9 +264,10 @@ a {
 
 body {
   height: 100vh;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: #345231;
   font-size: 62.5%;
+  font-family: "Open Sans", sans-serif;
 }
 
 .wrapper {
@@ -288,6 +290,51 @@ h1 {
   margin: 7vh 0 3vh;
   font-size: 2rem;
   color: #aac5aa;
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: whitesmoke;
+  display: inline-block;
+  opacity: 0;
+  z-index: -1;
+}
+
+h2.win {
+  z-index: 2;
+  cursor: default;
+  -webkit-animation: winner 0.7s ease 0s 3 forwards;
+          animation: winner 0.7s ease 0s 3 forwards;
+}
+
+@-webkit-keyframes winner {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes winner {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 header {
@@ -401,6 +448,13 @@ button.nav:active, .rulesContainer button.closeRules:active {
   color: #1F1F1F;
 }
 
+button.nav[disabled="true"], .rulesContainer button.closeRules[disabled="true"] {
+  background: #345231;
+  color: #aac5aa;
+  -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+          box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+}
+
 .levelSelector {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -433,14 +487,21 @@ button.nav:active, .rulesContainer button.closeRules:active {
   margin: 0 auto;
 }
 
+.mineField li {
+  margin: 0;
+  padding: 0;
+}
+
 .tile {
   width: 23px;
   height: 23px;
   margin: 1px;
+  border: none;
   text-align: center;
   border-radius: 2px;
   -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
           box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+  cursor: default;
 }
 
 .tile.hidden {
@@ -470,6 +531,11 @@ button.nav:active, .rulesContainer button.closeRules:active {
   background: #d10000;
   -webkit-box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
           box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
+}
+
+.tile:focus {
+  outline: none;
+  border: 1px dotted #94c79a;
 }
 
 .rulesContainer {

@@ -152,7 +152,7 @@ app.visualizeGrid = () => {
 	minefield.style.width = `${app.grid.width * 25}px`;
 	minefield.style.height = `${app.grid.height * 25}px`;
 	app.grid.forEach((tile) => {
-		const htmlToAppend = `<li class="tile hidden" data-position="${tile.pos}"> ${tile.mine ? "" : ""}</li>`;
+		const htmlToAppend = `<li class="tile hidden" data-position="${tile.pos}" tab-index="1"> ${tile.mine ? "" : ""}</li>`;
 		minefield.innerHTML += htmlToAppend;
 	});
 	const gameTiles = document.getElementsByClassName("tile");
@@ -174,20 +174,25 @@ const activeBoard = (e) => {
 	// check special logic on each tile, if it passes call makeMove function
 	if (checkTile(e, targetTile)) {
 		app.makeMove(targetTile);
+		app.checkWin();
 	}
 };
 
 // determine what kind of tile has been clicked and what to do next
 const checkTile = (e, targetTile) => {
 	const checkTile = [...e.target.classList];
-	if (checkTile.join(" ").includes("revealed") || checkTile.join(" ").includes("flagged")) {
-		console.log("already revealed / flagged");
+	if (checkTile.join(" ").includes("revealed")) {
 		return false;
-	}
-	if (app.flagState) {
+	} else if (checkTile.join(" ").includes("flagged") && !app.flagState) {
+		console.log("safe");
+		return false;
+	} else if (checkTile.join(" ").includes("flagged") && app.flagState) {
+		app.markFlag(e, targetTile);
+		return false;
+	} else if (app.flagState) {
 		app.markFlag(e, targetTile);
 	} else if (targetTile[0].mine) {
-		gameOver(e);
+		gameOver(e, "lose");
 		return false;
 	} else {
 		return true;
@@ -213,6 +218,18 @@ app.markFlag = (e, targetTile) => {
 		return false;
 	}
 };
+
+app.checkWin = () =>{
+	const revealedTiles = document.getElementsByClassName('revealed')
+	const hiddenTiles = document.getElementsByClassName('hidden')
+	if (revealedTiles != undefined) {
+		if(revealedTiles.length + app.mines.length == app.grid.length){
+			if (hiddenTiles.length == app.mines.length) {
+				gameOver(null,'win');
+			}
+		}
+	} 
+}
 // trigger listeners for flag button
 const flagButton = document.querySelector(".flag");
 app.listenForFlagState = () => {
@@ -225,54 +242,69 @@ app.toggleFlagState = () => {
 	app.flagState ? flagButton.classList.add("active") : flagButton.classList.remove("active");
 };
 
-const gameOver = (e) => {
-	e.target.classList.add("red");
-	e.target.classList.remove("hidden");
-	let count = 0;
-	let minesLeft = parseInt(document.querySelector(".mine.number").innerHTML);
-	let nodeList = [];
-	const minesNotFlagged = app.grid.filter((mine) => {
-		if (mine.mine && !mine.flag) {
-			return mine;
-		}
-	});
-	console.log(app.mines, minesNotFlagged);
-	minesNotFlagged.forEach((mine, i) => {
-		const minePosition = mine.pos.toString("");
-		const change = document.querySelectorAll(`[data-position="${minePosition}"]`);
-		nodeList.push(change);
-		count++;
-		setTimeout(() => {
-			minesLeft--;
-			change[0].classList.add("red");
-			document.querySelector(".mine.number").innerHTML = minesLeft;
-		}, 100 + count * 100);
-	});
-	// freeze clock
+const gameOver = (e, version) => {
+	document.querySelector(".mineField").removeEventListener("click", activeBoard);
+	document.querySelector(".mineField").removeEventListener("contextmenu", app.rightClick);
+	flagButton.setAttribute('disabled',true)
 	clearInterval(startTimer);
+	if (version == "lose") {
+		e.target.classList.add("red");
+		e.target.classList.remove("hidden");
+		let count = 0;
+		let minesLeft = parseInt(document.querySelector(".mine.number").innerHTML);
+		let nodeList = [];
+		const minesNotFlagged = app.grid.filter((mine) => {
+			if (mine.mine) {
+				return mine;
+			}
+		});
+		console.log(app.mines, minesNotFlagged);
+		minesNotFlagged.forEach((mine, i) => {
+			const minePosition = mine.pos.toString("");
+			const change = document.querySelectorAll(`[data-position="${minePosition}"]`);
+			nodeList.push(change);
+			count++;
+			setTimeout(() => {
+				// minesLeft--;
+				change[0].classList.add("red");
+				// document.querySelector(".mine.number").innerHTML = minesLeft;
+			}, 100 + count * 100);
+		});
+	} else {
+const winMessage = document.querySelector('.winMessage');
+winMessage.classList.add('win')
+setTimeout(()=>{
+	winMessage.remove('win')
+	console.log('chekit')
+},2100)
+	}
 };
 
 document.addEventListener("DOMContentLoaded", function () {
 	app.rulesToggle();
 	app.selectDifficulty();
-	app.createGrid(10, 10);
-	app.placeMines(10, 0);
+	app.createGrid(9, 9);
+	app.placeMines(1, 0);
 	app.visualizeGrid();
 	app.listenForFlagState();
 	app.triggerRightClicks();
 });
 
 app.triggerRightClicks = () => {
-	document.querySelector(".mineField").addEventListener("contextmenu", (e) => {
-		e.preventDefault();
+	document.querySelector(".mineField").addEventListener("contextmenu", app.rightClick);
+};
+
+app.rightClick = e => {
+	e.preventDefault();
 		const filterBy = e.target.getAttribute("data-position").split(",");
 		const targetTile = app.grid.filter((tile) => {
 			return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
 		});
-		console.log(targetTile[0]);
-		app.markFlag(e, targetTile);
-	});
-};
+		// prevent revealed tiles being flagger
+		if (![...e.target.classList].includes("revealed")) {
+			app.markFlag(e, targetTile);
+		}
+}
 
 app.selectDifficulty = () => {
 	const difficulty = document.getElementsByClassName("difficulty");
@@ -294,6 +326,8 @@ app.selectDifficulty = () => {
 			app.placeMines(dataMod[2], 0);
 			app.visualizeGrid();
 			app.resetTimer();
+			app.triggerRightClicks();
+			flagButton.removeAttribute('disabled')
 		});
 	}
 };
@@ -309,10 +343,10 @@ app.resetTimer = () => {
 	startTimer = setInterval(gameTimer, 1000);
 };
 
-// remove event listener after mine clicked and stop timer
-// if all tiles revealed are !mine and all tiles !revealed are mine, win
-// work on bug where right clicked flags only change back under right clicks
-// prevent flagging revealed tiles
+
+
+// write win screen logic (stop timer, congratulate winner, show time idk)
+
 
 // style related javascript
 
