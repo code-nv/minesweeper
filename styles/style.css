@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -246,7 +247,8 @@ h4,
 h5,
 h6,
 ul,
-ol {
+ol,
+p {
   margin: 0;
   padding: 0;
 }
@@ -262,50 +264,218 @@ a {
 
 body {
   height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #345231;
+  font-size: 62.5%;
+  font-family: "Open Sans", sans-serif;
 }
 
 .wrapper {
-  width: 80%;
-  max-width: 1200px;
-  margin: 2% auto;
+  position: relative;
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-aside {
-  width: 20%;
+main {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  width: 100%;
+  margin: 7vh 0 3vh;
+  font-size: 2rem;
+  color: #aac5aa;
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: whitesmoke;
+  display: inline-block;
+  opacity: 0;
+  z-index: -1;
+}
+
+h2.win {
+  z-index: 2;
+  cursor: default;
+  -webkit-animation: winner 0.7s ease 0s 3 forwards;
+          animation: winner 0.7s ease 0s 3 forwards;
+}
+
+@-webkit-keyframes winner {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes winner {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+header {
+  background: #345231;
 }
 
 main {
-  width: 80%;
-}
-
-.gameContainer {
+  padding: 10px;
+  border-radius: 5px;
+  background: #345231;
+  font-size: 1rem;
+  -webkit-box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
+          box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.gameContainer {
+  position: relative;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  margin: 5% auto;
-  padding: 10px;
+  opacity: 1;
+}
+
+.gameContainer.hide {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.gameContainer.show {
+  opacity: 1;
+  z-index: 2;
+}
+
+.controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  text-transform: capitalize;
+}
+
+.controls .container {
+  width: 60px;
+  text-align: center;
+  color: #aac5aa;
+}
+
+.controls .container .number {
+  color: #1F1F1F;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
   background: #709B6B;
+  -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+          box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+  border: 1px solid #597e55;
 }
 
 .flag {
-  background: #d3d2d2;
-  -webkit-box-shadow: inset 0 -5px 4px grey;
-          box-shadow: inset 0 -5px 4px grey;
+  width: 60px;
+  margin: 0 30px;
+  -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-self: stretch;
+}
+
+.stats {
+  width: 50%;
+}
+
+button.nav, .rulesContainer button.closeRules {
+  background: #345231;
+  color: #aac5aa;
+  -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+          box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
   border: none;
   padding: 5px;
   border-radius: 5px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
 }
 
-.flag.active {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  background: skyblue;
+button.nav.active, .rulesContainer button.active.closeRules {
+  background: #709B6B;
+  -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+          box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+  color: #1F1F1F;
+}
+
+button.nav:active, .rulesContainer button.closeRules:active {
+  background: #709B6B;
+  -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+          box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+  color: #1F1F1F;
+}
+
+button.nav[disabled="true"], .rulesContainer button.closeRules[disabled="true"] {
+  background: #345231;
+  color: #aac5aa;
+  -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+          box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+}
+
+.levelSelector {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.levelSelector button {
+  width: 70px;
+  margin: 10px 2.5px 0;
 }
 
 .mineField {
@@ -314,21 +484,37 @@ main {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.mineField li {
+  margin: 0;
+  padding: 0;
 }
 
 .tile {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #1F1F1F;
+  width: 23px;
+  height: 23px;
+  margin: 1px;
+  border: none;
   text-align: center;
+  border-radius: 2px;
+  -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+          box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
+  cursor: default;
 }
 
 .tile.hidden {
   background: #345231;
+  width: 25px;
+  height: 25px;
+  margin: 0;
 }
 
 .tile.revealed {
   background: #709B6B;
+  -webkit-box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
+          box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
 }
 
 .tile.warning {
@@ -336,9 +522,115 @@ main {
 }
 
 .tile.flagged {
-  background: beige;
+  background: #c2c0b1;
+  -webkit-box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
+          box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
 }
 
 .tile.red {
-  background: red;
+  background: #d10000;
+  -webkit-box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
+          box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
+}
+
+.tile:focus {
+  outline: none;
+  border: 1px dotted #94c79a;
+}
+
+.rulesContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background: #345231;
+  color: #aac5aa;
+}
+
+.rulesContainer.show {
+  position: relative;
+  -webkit-transition: width 0.5s ease 0.2s;
+  transition: width 0.5s ease 0.2s;
+  z-index: 2;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  color: #aac5aa;
+  opacity: 1;
+}
+
+.rulesContainer.hide {
+  z-index: 1;
+  height: 0px;
+  color: transparent;
+  opacity: 0;
+  position: absolute;
+}
+
+.rulesContainer h2 {
+  font-size: 1.2rem;
+  width: 120px;
+  text-transform: capitalize;
+}
+
+.rulesContainer button.closeRules {
+  font-size: 1.2rem;
+  min-width: 75px;
+  margin-bottom: 0;
+}
+
+.rulesContainer ol {
+  list-style-position: inside;
+  font-size: 1.1rem;
+  color: #aac5aa;
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  h1 {
+    width: 100%;
+    text-align: center;
+  }
+  aside {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  aside.hide {
+    width: 140px;
+  }
+  aside h2 {
+    margin-bottom: 5px;
+  }
+  aside button {
+    margin-left: 17.5px;
+  }
+}
+
+@media (max-width: 880px) {
+  .wrapper {
+    width: 100%;
+  }
+  aside {
+    top: calc(-10vh - 2rem);
+    left: 10px;
+  }
+  aside h2 {
+    display: none;
+  }
 }

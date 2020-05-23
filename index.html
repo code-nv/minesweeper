@@ -11,24 +11,50 @@
 	</head>
 	<body>
 		<header>
-			<h1>Minesweeper</h1>
+			<div class="wrapper">
+				<h1>Minesweeper</h1>
+			</div>
 		</header>
 		<div class="wrapper">
-			<aside>
-				<h2>how to play</h2>
-				<ol>
-                    <li>the grid contains a random number of mines.</li>
-                    <li>Clicking a tile will reveal what's hiding underneath.</li>
-                    <li>If a tile is adjacent to a mine, it will display how many mines it is adjacent to.</li>
-                    <li>If the tile is not adjacent to any mines, it will reveal all of its adjacent tiles until the revealed tiles are adjacent to mines.</li>
-                    <li>You can mark tiles believed to be mines by toggling a flag. Flagged tiles will not reveal themselves and will be protected from accidental clicks.</li>
-                    <li>The game ends when all safe tiles have been revealed.</li>
-				</ol>
-			</aside>
 			<main>
-				<section class="gameContainer">
-					<button class="flag">flag</button>
+				<section class="gameContainer show">
+					<div class="controls">
+						<div class="mines container">
+							<p class="mine number"></p>
+							<p class="label">mines</p>
+						</div>
+						<button class="flag nav">flag</button>
+						<div class="time container">
+							<p class="time number">0</p>
+							<p class="label">time</p>
+						</div>
+					</div>
+					<h2 class="winMessage">winner!</h2>
 					<ul class="mineField"></ul>
+					<nav class="levelSelector">
+						<button class="difficulty easy nav" data-difficulty="9 9 10">easy</button>
+						<button class="difficulty medium nav" data-difficulty="14 15 40">medium</button>
+						<button class="difficulty hard nav" data-difficulty="19 25 94">hard</button>
+						<button class="difficulty expert nav" data-difficulty="expert">expert</button>
+						<button class="nav asideButton openRules">how to play</button>
+					</nav>
+				</section>
+				<section class="rulesContainer hide">
+					<button class="nav closeRules">close</button>
+					<ol class="howToPlay">
+						<li>The grid contains a random number of mines.</li>
+						<li>Clicking a tile will reveal what's hiding underneath.</li>
+						<li>If a tile is adjacent to a mine, it will display how many mines it is adjacent to.</li>
+						<li>
+							If the tile is not adjacent to any mines, it will reveal all of its adjacent tiles until the revealed tiles
+							are adjacent to mines.
+						</li>
+						<li>
+							You can mark tiles believed to be mines by toggling a flag. Flagged tiles will not reveal themselves and
+							will be protected from accidental clicks.
+						</li>
+						<li>The game ends when all safe tiles have been revealed.</li>
+					</ol>
 				</section>
 			</main>
 		</div>
