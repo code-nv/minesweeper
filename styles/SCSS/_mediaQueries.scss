@@ -30,3 +30,47 @@
         left:10px;
     }
 }
+
+@media (max-width:500px){
+    .mineField li.tileContainer {
+        font-size: 12px;
+        line-height: 0;
+        text-align: left;
+    }
+    .tile.hidden,
+    .tile.red,
+    .tile.hidden.red {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+    }
+    .tile.revealed {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 400px) {
+main {
+    width: 100%;
+    padding:0;
+    box-shadow: none;
+}
+.mineField li.tileContainer {
+    font-size: 10px;
+}
+.controls {
+    margin-bottom: 10px;
+}
+.tile.hidden,
+.tile.red,
+.tile.hidden.red {
+    width: 19px;
+    height: 19px;
+    margin:0;
+}
+.tile.revealed {
+    width: 17px;
+    height: 17px;
+}
+}

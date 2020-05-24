@@ -89,6 +89,7 @@ app.makeMove = (current) => {
 		// reveal tile clicked
 		change[0].classList.add("revealed");
 		change[0].classList.remove("hidden");
+		change[0].setAttribute('disabled',true)
 		// looks at adjacent
 		if (tile.warning) {
 			change[0].innerHTML = tile.adjacentMines;
@@ -127,6 +128,7 @@ app.checkAdjacent = (current, purpose = "playing") => {
 						change[0].classList.add("revealed");
 						change[0].classList.remove("hidden");
 						change[0].innerHTML = tile.adjacentMines;
+						change[0].setAttribute('disabled',true)
 						// warnings do not trigger neighbouring warnings
 					}
 					// reveal if empty
@@ -135,6 +137,7 @@ app.checkAdjacent = (current, purpose = "playing") => {
 						change[0].classList.add("revealed");
 						change[0].classList.remove("hidden");
 						app.adjacentMoveTiles.push(tile);
+						change[0].setAttribute('disabled',true)
 						// empty tiles trigger neighbouring tiles
 						app.makeMove(app.adjacentMoveTiles);
 					}
@@ -149,12 +152,14 @@ app.checkAdjacent = (current, purpose = "playing") => {
 // display minefield
 app.visualizeGrid = () => {
 	const minefield = document.querySelector(".mineField");
-	minefield.style.width = `${app.grid.width * 25}px`;
-	minefield.style.height = `${app.grid.height * 25}px`;
 	app.grid.forEach((tile) => {
-		const htmlToAppend = `<li class="tile hidden" data-position="${tile.pos}" tab-index="1"> ${tile.mine ? "" : ""}</li>`;
+		const htmlToAppend = `<li class="tileContainer"><button class="tile hidden" data-position="${tile.pos}" > ${tile.mine ? "" : ""}</button></li>`;
 		minefield.innerHTML += htmlToAppend;
 	});
+	// getting 
+	const tileWidth = document.querySelector('.tileContainer').clientWidth;
+	minefield.style.width = `${app.grid.width * tileWidth}px`;
+	minefield.style.height = `${app.grid.height * tileWidth}px`;
 	const gameTiles = document.getElementsByClassName("tile");
 	for (let i = 0; i < gameTiles.length; i++) {
 		// gameTiles[i].style.width = `${app.grid.tileWidth}%`;

@@ -80,6 +80,10 @@ button.nav {
 		color: $mainFont;
 		box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
 	}
+	&:focus {
+		outline:none;
+		border: 1px dotted #94c79a;
+	}
 }
 
 .levelSelector {
@@ -93,15 +97,20 @@ button.nav {
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 auto;
+	
 
 	li {
 		margin:0;
 		padding:0;
+		font-size: 14px;
+		line-height: 1;
+		
 	}
 }
 
 
 .tile {
+	display: inline-block;
 	width: 23px;
 	height: 23px;
 	margin: 1px;
@@ -133,8 +142,12 @@ button.nav {
 		box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
 	}
 
-	&:focus {
+	&:focus-within {
 		outline:none;
 		border: 1px dotted #94c79a;
+	}
+
+	&[disabled="true"]{
+		color: black;
 	}
 }
