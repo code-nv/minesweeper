@@ -90,13 +90,26 @@ button.nav {
 	@include flexRow(space-between);
 	button {
 		width: 70px;
-		margin: 10px 2.5px 0;
+		margin: 0 2.5px;
 	}
 }
 .mineField {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 auto;
+	margin: 10px auto;
+
+	&.easy {
+		width: 225px;
+		height: 225px;
+	}
+	&.medium {
+		width: 350px;
+		height: 375px;
+	}
+	&.hard {
+		width: 475px;
+		height: 625px;
+	}
 	
 
 	li {

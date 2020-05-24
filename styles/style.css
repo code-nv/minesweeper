@@ -480,7 +480,7 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 
 .levelSelector button {
   width: 70px;
-  margin: 10px 2.5px 0;
+  margin: 0 2.5px;
 }
 
 .mineField {
@@ -489,7 +489,22 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 10px auto;
+}
+
+.mineField.easy {
+  width: 225px;
+  height: 225px;
+}
+
+.mineField.medium {
+  width: 350px;
+  height: 375px;
+}
+
+.mineField.hard {
+  width: 475px;
+  height: 625px;
 }
 
 .mineField li {
@@ -653,14 +668,22 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
     line-height: 0;
     text-align: left;
   }
-  .tile.hidden,
-  .tile.red,
-  .tile.hidden.red {
+  .levelSelector {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .mineField.hard {
+    width: 380px;
+    height: 500px;
+  }
+  .mineField.hard .tile.hidden,
+  .mineField.hard .tile.red,
+  .mineField.hard .tile.hidden.red {
     width: 20px;
     height: 20px;
     margin: 0;
   }
-  .tile.revealed {
+  .mineField.hard .tile.revealed {
     width: 18px;
     height: 18px;
   }
@@ -676,18 +699,39 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
   .mineField li.tileContainer {
     font-size: 10px;
   }
-  .controls {
-    margin-bottom: 10px;
+  .levelSelector {
+    max-width: 320px;
+    margin: 0 auto;
   }
-  .tile.hidden,
-  .tile.red,
-  .tile.hidden.red {
-    width: 19px;
-    height: 19px;
+  .mineField.medium {
+    width: 320px;
+    height: auto;
+  }
+  .mineField.medium .tile.hidden,
+  .mineField.medium .tile.red,
+  .mineField.medium .tile.hidden.red {
+    width: 22.85px;
+    height: 22.85px;
     margin: 0;
   }
-  .tile.revealed {
-    width: 17px;
-    height: 17px;
+  .mineField.medium .tile.revealed {
+    width: 20.85px;
+    height: 20.85px;
+  }
+  .mineField.hard {
+    width: 320px;
+    height: auto;
+  }
+  .mineField.hard .tile.hidden,
+  .mineField.hard .tile.red,
+  .mineField.hard .tile.hidden.red {
+    width: 16.8px;
+    height: 16.8px;
+    margin: 0;
+  }
+  .mineField.hard .tile.revealed {
+    width: 16px;
+    height: 16px;
+    margin: 0.4px;
   }
 }
