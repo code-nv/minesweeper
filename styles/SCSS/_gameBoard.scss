@@ -80,28 +80,50 @@ button.nav {
 		color: $mainFont;
 		box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
 	}
+	&:focus {
+		outline:none;
+		border: 1px dotted #94c79a;
+	}
 }
 
 .levelSelector {
 	@include flexRow(space-between);
 	button {
 		width: 70px;
-		margin: 10px 2.5px 0;
+		margin: 0 2.5px;
 	}
 }
 .mineField {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 auto;
+	margin: 10px auto;
+
+	&.easy {
+		width: 225px;
+		height: 225px;
+	}
+	&.medium {
+		width: 350px;
+		height: 375px;
+	}
+	&.hard {
+		width: 475px;
+		height: 625px;
+	}
+	
 
 	li {
 		margin:0;
 		padding:0;
+		font-size: 14px;
+		line-height: 1;
+		
 	}
 }
 
 
 .tile {
+	display: inline-block;
 	width: 23px;
 	height: 23px;
 	margin: 1px;
@@ -133,8 +155,12 @@ button.nav {
 		box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
 	}
 
-	&:focus {
+	&:focus-within {
 		outline:none;
 		border: 1px dotted #94c79a;
+	}
+
+	&[disabled="true"]{
+		color: black;
 	}
 }

@@ -455,6 +455,11 @@ button.nav[disabled="true"], .rulesContainer button.closeRules[disabled="true"] 
           box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
 }
 
+button.nav:focus, .rulesContainer button.closeRules:focus {
+  outline: none;
+  border: 1px dotted #94c79a;
+}
+
 .levelSelector {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -475,7 +480,7 @@ button.nav[disabled="true"], .rulesContainer button.closeRules[disabled="true"] 
 
 .levelSelector button {
   width: 70px;
-  margin: 10px 2.5px 0;
+  margin: 0 2.5px;
 }
 
 .mineField {
@@ -484,15 +489,33 @@ button.nav[disabled="true"], .rulesContainer button.closeRules[disabled="true"] 
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 10px auto;
+}
+
+.mineField.easy {
+  width: 225px;
+  height: 225px;
+}
+
+.mineField.medium {
+  width: 350px;
+  height: 375px;
+}
+
+.mineField.hard {
+  width: 475px;
+  height: 625px;
 }
 
 .mineField li {
   margin: 0;
   padding: 0;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .tile {
+  display: inline-block;
   width: 23px;
   height: 23px;
   margin: 1px;
@@ -533,9 +556,13 @@ button.nav[disabled="true"], .rulesContainer button.closeRules[disabled="true"] 
           box-shadow: inset -3px -3px 7px #8f0000, inset 3px 3px 7px #ff0000;
 }
 
-.tile:focus {
+.tile:focus-within {
   outline: none;
   border: 1px dotted #94c79a;
+}
+
+.tile[disabled="true"] {
+  color: black;
 }
 
 .rulesContainer {
@@ -632,5 +659,79 @@ button.nav[disabled="true"], .rulesContainer button.closeRules[disabled="true"] 
   }
   aside h2 {
     display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .mineField li.tileContainer {
+    font-size: 12px;
+    line-height: 0;
+    text-align: left;
+  }
+  .levelSelector {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .mineField.hard {
+    width: 380px;
+    height: 500px;
+  }
+  .mineField.hard .tile.hidden,
+  .mineField.hard .tile.red,
+  .mineField.hard .tile.hidden.red {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+  .mineField.hard .tile.revealed {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  main {
+    width: 100%;
+    padding: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .mineField li.tileContainer {
+    font-size: 10px;
+  }
+  .levelSelector {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .mineField.medium {
+    width: 320px;
+    height: auto;
+  }
+  .mineField.medium .tile.hidden,
+  .mineField.medium .tile.red,
+  .mineField.medium .tile.hidden.red {
+    width: 22.85px;
+    height: 22.85px;
+    margin: 0;
+  }
+  .mineField.medium .tile.revealed {
+    width: 20.85px;
+    height: 20.85px;
+  }
+  .mineField.hard {
+    width: 320px;
+    height: auto;
+  }
+  .mineField.hard .tile.hidden,
+  .mineField.hard .tile.red,
+  .mineField.hard .tile.hidden.red {
+    width: 16.8px;
+    height: 16.8px;
+    margin: 0;
+  }
+  .mineField.hard .tile.revealed {
+    width: 16px;
+    height: 16px;
+    margin: 0.4px;
   }
 }
