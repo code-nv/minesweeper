@@ -44,7 +44,7 @@ app.createGrid = (width = 0, height = 0) => {
 		}
 		app.hidden.push(app.grid[i]);
 	}
-	console.log(app.grid);
+	// console.log(app.grid);
 };
 
 // random number generator
@@ -185,7 +185,7 @@ const checkTile = (e, targetTile) => {
 	if (checkTile.join(" ").includes("revealed")) {
 		return false;
 	} else if (checkTile.join(" ").includes("flagged") && !app.flagState) {
-		console.log("safe");
+		// console.log("safe");
 		return false;
 	} else if (checkTile.join(" ").includes("flagged") && app.flagState) {
 		app.markFlag(e, targetTile);
@@ -215,7 +215,7 @@ app.markFlag = (e, targetTile) => {
 		count--;
 		document.querySelector(".mine.number").innerHTML = count;
 		targetTile[0].flag = true;
-		console.log(targetTile, app.grid);
+		// console.log(targetTile, app.grid);
 		return false;
 	}
 };
@@ -259,7 +259,7 @@ const gameOver = (e, version) => {
 				return mine;
 			}
 		});
-		console.log(app.mines, minesNotFlagged);
+		// console.log(app.mines, minesNotFlagged);
 		minesNotFlagged.forEach((mine, i) => {
 			const minePosition = mine.pos.toString("");
 			const change = document.querySelectorAll(`[data-position="${minePosition}"]`);
@@ -276,8 +276,7 @@ const winMessage = document.querySelector('.winMessage');
 	document.querySelector(".mine.number").innerHTML = 0;
 winMessage.classList.add('win')
 setTimeout(()=>{
-	winMessage.remove('win')
-	console.log('chekit')
+	winMessage.classList.remove('win')
 },2100)
 	}
 };
