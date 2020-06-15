@@ -351,7 +351,6 @@ main {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -484,40 +483,36 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 }
 
 .mineField {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  display: -ms-grid;
+  display: grid;
   margin: 10px auto;
 }
 
 .mineField.easy {
-  width: 225px;
-  height: 225px;
+  -ms-grid-columns: (40px)[9];
+      grid-template-columns: repeat(9, 40px);
 }
 
 .mineField.medium {
-  width: 350px;
-  height: 375px;
+  -ms-grid-columns: (40px)[14];
+      grid-template-columns: repeat(14, 40px);
 }
 
 .mineField.hard {
-  width: 475px;
-  height: 625px;
+  -ms-grid-columns: (40px)[19];
+      grid-template-columns: repeat(19, 40px);
 }
 
 .mineField li {
-  margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1;
 }
 
 .tile {
   display: inline-block;
-  width: 23px;
-  height: 23px;
+  width: 38px;
+  height: 38px;
   margin: 1px;
   border: none;
   text-align: center;
@@ -525,14 +520,15 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
   -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
           box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
   cursor: default;
+  line-height: 1;
   letter-spacing: 0;
   overflow: hidden;
 }
 
 .tile.hidden {
   background: #345231;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   margin: 0;
 }
 
@@ -547,6 +543,9 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 }
 
 .tile.flagged {
+  width: 38px;
+  height: 38px;
+  margin: 1px;
   background: #c2c0b1;
   -webkit-box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
           box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
