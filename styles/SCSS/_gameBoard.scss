@@ -5,7 +5,7 @@ main {
 	font-size: 1rem;
 	box-shadow: 9px 9px 14px #283e25, -9px -9px 14px #40663d;
 	width: fit-content;
-	max-width: 500px;
+	// max-width: 500px;
 	margin: 0 auto;
 }
 .gameContainer {
@@ -94,28 +94,32 @@ button.nav {
 	}
 }
 .mineField {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	// grid-template-rows: 40px;
+	// flex-wrap: wrap;
 	margin: 10px auto;
 
 	&.easy {
-		width: 225px;
-		height: 225px;
+		grid-template-columns: repeat(9, 40px)
+		// width: 225px;
+		// height: 225px;
 	}
 	&.medium {
-		width: 350px;
-		height: 375px;
+		grid-template-columns: repeat(14, 40px)
+		// width: 350px;
+		// height: 375px;
 	}
 	&.hard {
-		width: 475px;
-		height: 625px;
+		grid-template-columns: repeat(19, 40px)
+		// width: 475px;
+		// height: 625px;
 	}
 	
 
 	li {
-		margin:0;
+		// margin:0;
 		padding:0;
-		font-size: 14px;
+		font-size: 18px;
 		line-height: 1;
 		
 	}
@@ -124,21 +128,22 @@ button.nav {
 
 .tile {
 	display: inline-block;
-	width: 23px;
-	height: 23px;
+	width: 38px;
+	height: 38px;
 	margin: 1px;
 	border:none;
 	text-align: center;
 	border-radius: 2px;
 	box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
 	cursor: default;
+	line-height: 1;
 	letter-spacing: 0;
 	overflow: hidden;
 
 	&.hidden {
 		background: $primaryMed;
-		width: 25px;
-		height: 25px;
+		width: 40px;
+		height: 40px;
 		margin: 0;
 	}
 	&.revealed {
@@ -149,6 +154,9 @@ button.nav {
 		background: $accentOne;
 	}
 	&.flagged {
+		width: 38px;
+	height: 38px;
+	margin: 1px;
 		background: #c2c0b1;
 		box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
 	}
