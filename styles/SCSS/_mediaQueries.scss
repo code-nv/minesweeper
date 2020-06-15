@@ -31,93 +31,93 @@
 	}
 }
 
-@media (max-width: 500px) {
-	.mineField li.tileContainer {
-		font-size: 12px;
-		line-height: 0;
-		text-align: left;
-	}
-.levelSelector {
-    max-width: 380px;
-    margin: 0 auto;
-}
-	.mineField {
-		&.easy {
-			// width: 180px;
-			// height: 180px;
-		}
-		&.medium {
-			// width: 280px;
-			// height: 300px;
-		}
-		&.hard {
-			width: 380px;
-			height: 500px;
-			.tile.hidden,
-			.tile.red,
-			.tile.hidden.red {
-				width: 20px;
-				height: 20px;
-				margin: 0;
-			}
-			.tile.revealed {
-				width: 18px;
-				height: 18px;
-			}
-		}
-	}
-}
+// @media (max-width: 500px) {
+// 	.mineField li.tileContainer {
+// 		font-size: 12px;
+// 		line-height: 0;
+// 		text-align: left;
+// 	}
+// .levelSelector {
+//     max-width: 380px;
+//     margin: 0 auto;
+// }
+// 	.mineField {
+// 		&.easy {
+// 			// width: 180px;
+// 			// height: 180px;
+// 		}
+// 		&.medium {
+// 			// width: 280px;
+// 			// height: 300px;
+// 		}
+// 		&.hard {
+// 			width: 760px;
+// 			height: 1000px;
+// 			.tile.hidden,
+// 			.tile.red,
+// 			.tile.hidden.red {
+// 				width: 40px;
+// 				height: 40px;
+// 				margin: 0;
+// 			}
+// 			.tile.revealed {
+// 				width: 38px;
+// 				height: 38px;
+// 			}
+// 		}
+// 	}
+// }
 
-@media (max-width: 400px) {
-	main {
-		width: 100%;
-		padding: 0;
-		box-shadow: none;
-	}
-	.mineField li.tileContainer {
-		font-size: 10px;
-    }
+// @media (max-width: 400px) {
+// 	main {
+// 		width: 100%;
+// 		padding: 0;
+// 		box-shadow: none;
+// 	}
+// 	.mineField li.tileContainer {
+// 		font-size: 10px;
+//     }
 
-    .levelSelector {
-        max-width: 320px;
-        margin: 0 auto;
-    }
+//     .levelSelector {
+//         max-width: 320px;
+//         margin: 0 auto;
+//     }
     
-	.mineField {
-		&.easy {
-			// width: 180px;
-			// height: 180px;
-		}
-		&.medium {
-			width: 320px;
-			height: auto;
-			.tile.hidden,
-			.tile.red,
-			.tile.hidden.red {
-				width: 22.85px;
-				height: 22.85px;
-				margin: 0;
-			}
-			.tile.revealed {
-				width: 20.85px;
-				height: 20.85px;
-			}
-		}
-		&.hard {
-			width: 320px;
-			height: auto;
-			.tile.hidden,
-			.tile.red,
-			.tile.hidden.red {
-				width: 16.8px;
-				height: 16.8px;
-				margin: 0;
-			}
-			.tile.revealed {
-				width: 16px;
-				height: 16px;
-				margin: 0.4px;
-			}
-		}
-	}
-}
+// 	.mineField {
+// 		&.easy {
+// 			// width: 180px;
+// 			// height: 180px;
+// 		}
+// 		&.medium {
+// 			width: 320px;
+// 			height: auto;
+// 			.tile.hidden,
+// 			.tile.red,
+// 			.tile.hidden.red {
+// 				width: 22.85px;
+// 				height: 22.85px;
+// 				margin: 0;
+// 			}
+// 			.tile.revealed {
+// 				width: 20.85px;
+// 				height: 20.85px;
+// 			}
+// 		}
+// 		&.hard {
+// 			width: 320px;
+// 			height: auto;
+// 			.tile.hidden,
+// 			.tile.red,
+// 			.tile.hidden.red {
+// 				width: 16.8px;
+// 				height: 16.8px;
+// 				margin: 0;
+// 			}
+// 			.tile.revealed {
+// 				width: 16px;
+// 				height: 16px;
+// 				margin: 0.4px;
+// 			}
+// 		}
+// 	}
+// }

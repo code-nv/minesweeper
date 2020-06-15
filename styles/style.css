@@ -351,7 +351,6 @@ main {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -484,40 +483,36 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 }
 
 .mineField {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  display: -ms-grid;
+  display: grid;
   margin: 10px auto;
 }
 
 .mineField.easy {
-  width: 225px;
-  height: 225px;
+  -ms-grid-columns: (40px)[9];
+      grid-template-columns: repeat(9, 40px);
 }
 
 .mineField.medium {
-  width: 350px;
-  height: 375px;
+  -ms-grid-columns: (40px)[14];
+      grid-template-columns: repeat(14, 40px);
 }
 
 .mineField.hard {
-  width: 475px;
-  height: 625px;
+  -ms-grid-columns: (40px)[19];
+      grid-template-columns: repeat(19, 40px);
 }
 
 .mineField li {
-  margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1;
 }
 
 .tile {
   display: inline-block;
-  width: 23px;
-  height: 23px;
+  width: 38px;
+  height: 38px;
   margin: 1px;
   border: none;
   text-align: center;
@@ -525,14 +520,15 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
   -webkit-box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
           box-shadow: inset -3px -3px 7px #233821, inset 3px 3px 7px #456c41;
   cursor: default;
+  line-height: 1;
   letter-spacing: 0;
   overflow: hidden;
 }
 
 .tile.hidden {
   background: #345231;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   margin: 0;
 }
 
@@ -547,6 +543,9 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 }
 
 .tile.flagged {
+  width: 38px;
+  height: 38px;
+  margin: 1px;
   background: #c2c0b1;
   -webkit-box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
           box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
@@ -661,79 +660,5 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
   }
   aside h2 {
     display: none;
-  }
-}
-
-@media (max-width: 500px) {
-  .mineField li.tileContainer {
-    font-size: 12px;
-    line-height: 0;
-    text-align: left;
-  }
-  .levelSelector {
-    max-width: 380px;
-    margin: 0 auto;
-  }
-  .mineField.hard {
-    width: 380px;
-    height: 500px;
-  }
-  .mineField.hard .tile.hidden,
-  .mineField.hard .tile.red,
-  .mineField.hard .tile.hidden.red {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-  }
-  .mineField.hard .tile.revealed {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-@media (max-width: 400px) {
-  main {
-    width: 100%;
-    padding: 0;
-    -webkit-box-shadow: none;
-            box-shadow: none;
-  }
-  .mineField li.tileContainer {
-    font-size: 10px;
-  }
-  .levelSelector {
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  .mineField.medium {
-    width: 320px;
-    height: auto;
-  }
-  .mineField.medium .tile.hidden,
-  .mineField.medium .tile.red,
-  .mineField.medium .tile.hidden.red {
-    width: 22.85px;
-    height: 22.85px;
-    margin: 0;
-  }
-  .mineField.medium .tile.revealed {
-    width: 20.85px;
-    height: 20.85px;
-  }
-  .mineField.hard {
-    width: 320px;
-    height: auto;
-  }
-  .mineField.hard .tile.hidden,
-  .mineField.hard .tile.red,
-  .mineField.hard .tile.hidden.red {
-    width: 16.8px;
-    height: 16.8px;
-    margin: 0;
-  }
-  .mineField.hard .tile.revealed {
-    width: 16px;
-    height: 16px;
-    margin: 0.4px;
   }
 }
