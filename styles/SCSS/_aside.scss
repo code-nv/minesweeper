@@ -10,14 +10,11 @@
 		min-height: fit-content;
 		color: $mainFont;
 		opacity: 1;
+		display: flex;
 	}
 
 	&.hide {
-		z-index: 1;
-		height: 0px;
-		color: transparent;
-		opacity: 0;
-		position: absolute;
+		display: none;
 	}
 
 	h2 {
