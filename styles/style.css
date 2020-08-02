@@ -486,21 +486,25 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
   display: -ms-grid;
   display: grid;
   margin: 10px auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: auto;
 }
 
 .mineField.easy {
-  -ms-grid-columns: (40px)[9];
-      grid-template-columns: repeat(9, 40px);
+  -ms-grid-columns: (25px)[9];
+      grid-template-columns: repeat(9, 25px);
 }
 
 .mineField.medium {
-  -ms-grid-columns: (40px)[14];
-      grid-template-columns: repeat(14, 40px);
+  -ms-grid-columns: (25px)[14];
+      grid-template-columns: repeat(14, 25px);
 }
 
 .mineField.hard {
-  -ms-grid-columns: (40px)[19];
-      grid-template-columns: repeat(19, 40px);
+  -ms-grid-columns: (25px)[19];
+      grid-template-columns: repeat(19, 25px);
 }
 
 .mineField li {
@@ -511,8 +515,8 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 
 .tile {
   display: block;
-  width: 38px;
-  height: 38px;
+  width: 23px;
+  height: 23px;
   margin: 1px;
   border: none;
   text-align: center;
@@ -527,8 +531,8 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 
 .tile.hidden {
   background: #345231;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   margin: 0;
 }
 
@@ -543,8 +547,8 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 }
 
 .tile.flagged {
-  width: 38px;
-  height: 38px;
+  width: 23px;
+  height: 23px;
   margin: 1px;
   background: #c2c0b1;
   -webkit-box-shadow: inset -3px -3px 7px #949286, inset 3px 3px 7px #e2e0ce;
@@ -660,5 +664,71 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
   }
   aside h2 {
     display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .levelSelector {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .mineField.easy {
+    -ms-grid-columns: (35px)[9];
+        grid-template-columns: repeat(9, 35px);
+  }
+  .mineField.medium {
+    -ms-grid-columns: (35px)[14];
+        grid-template-columns: repeat(14, 35px);
+  }
+  .mineField.hard {
+    -ms-grid-columns: (35px)[19];
+        grid-template-columns: repeat(19, 35px);
+  }
+  .mineField .tile.hidden,
+  .mineField .tile.red,
+  .mineField .tile.hidden.red {
+    width: 35px;
+    height: 35px;
+    margin: 0;
+  }
+  .mineField .tile.revealed {
+    width: 33px;
+    height: 33px;
+  }
+}
+
+@media (max-width: 500px) {
+  main {
+    width: auto;
+    padding: 0 10px;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .levelSelector {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .mineField.easy {
+    -ms-grid-columns: (40px)[9];
+        grid-template-columns: repeat(9, 40px);
+  }
+  .mineField.medium {
+    -ms-grid-columns: (40px)[14];
+        grid-template-columns: repeat(14, 40px);
+  }
+  .mineField.hard {
+    -ms-grid-columns: (40px)[19];
+        grid-template-columns: repeat(19, 40px);
+  }
+  .mineField .tile.hidden,
+  .mineField .tile.red,
+  .mineField .tile.hidden.red {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+  }
+  .mineField .tile.revealed {
+    width: 38px;
+    height: 38px;
   }
 }
