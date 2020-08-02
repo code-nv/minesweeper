@@ -236,10 +236,6 @@ html {
   overflow: hidden;
 }
 
-.padding {
-  padding: 100px 0;
-}
-
 h1,
 h2,
 h3,
@@ -509,8 +505,8 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
 
 .mineField li {
   padding: 0;
-  font-size: 18px;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 0;
 }
 
 .tile {

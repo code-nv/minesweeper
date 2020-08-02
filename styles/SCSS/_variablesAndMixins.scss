@@ -5,7 +5,6 @@ $primaryLight: #709B6B;
 $white: #F6F6F6;
 $accentOne: #E4A436;
 $grey: #454851;
-// $background: #c4b79d;
 $background: #ECE4B7;
 $background: #709775;
 $mainFont: #aac5aa;
@@ -28,34 +27,4 @@ $mainStack: "Open Sans", sans-serif;
     flex-direction: column;
     justify-content: $align;
     align-items: center;
-}
-
-//media query mixins
-@mixin maxWidth950 {
-	@media (max-width: 950px) {
-		@content;
-	}
-}
-// major break
-@mixin maxWidth740 {
-	@media (max-width: 740px) {
-		@content;
-	}
-}
-
-@mixin maxWidth600 {
-	@media (max-width: 600px) {
-		@content;
-	}
-}
-
-@mixin maxWidth500 {
-	@media (max-width: 500px) {
-		@content;
-	}
-}
-
-// this is an empty class that I was using the @extend rule to experiment with for future reference vs using mixins. I say empty class because it's not in the html markup but I am using it in my partials
-.padding {
-    padding: 100px 0;
 }

@@ -1,3 +1,5 @@
+// scroll to bottom for doc.ready function
+
 app = {};
 app.grid = [];
 app.hidden = [];
@@ -19,10 +21,6 @@ let startTimer = setInterval(gameTimer, 1000);
 
 // creates board given difficulty or dimensions
 app.createGrid = (width = 0, height = 0) => {
-	app.grid.width = width;
-	app.grid.height = height;
-	app.grid.tileWidth = 100 / width;
-	app.grid.tileHeight = 100 / height;
 	const totalTiles = width * height;
 	xPos = 0;
 	yPos = 0;
@@ -35,7 +33,6 @@ app.createGrid = (width = 0, height = 0) => {
 			flag: false,
 			warning: false,
 			revealed: false,
-			done: false,
 		};
 		xPos++;
 		if (xPos == width) {
@@ -89,7 +86,7 @@ app.makeMove = (current) => {
 		// reveal tile clicked
 		change[0].classList.add("revealed");
 		change[0].classList.remove("hidden");
-		change[0].setAttribute('disabled',true)
+		change[0].setAttribute("disabled", true);
 		// looks at adjacent
 		if (tile.warning) {
 			change[0].innerHTML = tile.adjacentMines;
@@ -128,7 +125,7 @@ app.checkAdjacent = (current, purpose = "playing") => {
 						change[0].classList.add("revealed");
 						change[0].classList.remove("hidden");
 						change[0].innerHTML = tile.adjacentMines;
-						change[0].setAttribute('disabled',true)
+						change[0].setAttribute("disabled", true);
 						// warnings do not trigger neighbouring warnings
 					}
 					// reveal if empty
@@ -137,7 +134,7 @@ app.checkAdjacent = (current, purpose = "playing") => {
 						change[0].classList.add("revealed");
 						change[0].classList.remove("hidden");
 						app.adjacentMoveTiles.push(tile);
-						change[0].setAttribute('disabled',true)
+						change[0].setAttribute("disabled", true);
 						// empty tiles trigger neighbouring tiles
 						app.makeMove(app.adjacentMoveTiles);
 					}
@@ -153,14 +150,11 @@ app.checkAdjacent = (current, purpose = "playing") => {
 app.visualizeGrid = () => {
 	const minefield = document.querySelector(".mineField");
 	app.grid.forEach((tile) => {
-		const htmlToAppend = `<li class="tileContainer"><button class="tile hidden" data-position="${tile.pos}" > ${tile.mine ? "" : ""}</button></li>`;
+		const htmlToAppend = `<li class="tileContainer"><button class="tile hidden" data-position="${tile.pos}" > ${
+			tile.mine ? "" : ""
+		}</button></li>`;
 		minefield.innerHTML += htmlToAppend;
 	});
-	// getting 
-	// const tileWidth = document.querySelector('.tileContainer').clientWidth;
-	// minefield.style.width = `${app.grid.width * tileWidth}px`;
-	// minefield.style.height = `${app.grid.height * tileWidth}px`;
-	// const gameTiles = document.getElementsByClassName("tile");
 
 	// tell board to listen for clicks
 	document.querySelector(".mineField").addEventListener("click", activeBoard);
@@ -220,17 +214,17 @@ app.markFlag = (e, targetTile) => {
 	}
 };
 
-app.checkWin = () =>{
-	const revealedTiles = document.getElementsByClassName('revealed')
-	const hiddenTiles = document.getElementsByClassName('hidden')
+app.checkWin = () => {
+	const revealedTiles = document.getElementsByClassName("revealed");
+	const hiddenTiles = document.getElementsByClassName("hidden");
 	if (revealedTiles != undefined) {
-		if(revealedTiles.length + app.mines.length == app.grid.length){
+		if (revealedTiles.length + app.mines.length == app.grid.length) {
 			if (hiddenTiles.length == app.mines.length) {
-				gameOver(null,'win');
+				gameOver(null, "win");
 			}
 		}
-	} 
-}
+	}
+};
 // trigger listeners for flag button
 const flagButton = document.querySelector(".flag");
 app.listenForFlagState = () => {
@@ -246,7 +240,7 @@ app.toggleFlagState = () => {
 const gameOver = (e, version) => {
 	document.querySelector(".mineField").removeEventListener("click", activeBoard);
 	document.querySelector(".mineField").removeEventListener("contextmenu", app.rightClick);
-	flagButton.setAttribute('disabled',true)
+	flagButton.setAttribute("disabled", true);
 	clearInterval(startTimer);
 	if (version == "lose") {
 		e.target.classList.add("red");
@@ -266,46 +260,34 @@ const gameOver = (e, version) => {
 			nodeList.push(change);
 			count++;
 			setTimeout(() => {
-				// minesLeft--;
 				change[0].classList.add("red");
-				// document.querySelector(".mine.number").innerHTML = minesLeft;
 			}, 100 + count * 100);
 		});
 	} else {
-const winMessage = document.querySelector('.winMessage');
-	document.querySelector(".mine.number").innerHTML = 0;
-winMessage.classList.add('win')
-setTimeout(()=>{
-	winMessage.classList.remove('win')
-},2100)
+		const winMessage = document.querySelector(".winMessage");
+		document.querySelector(".mine.number").innerHTML = 0;
+		winMessage.classList.add("win");
+		setTimeout(() => {
+			winMessage.classList.remove("win");
+		}, 2100);
 	}
 };
-
-document.addEventListener("DOMContentLoaded", function () {
-	app.rulesToggle();
-	app.selectDifficulty();
-	app.createGrid(9, 9);
-	app.placeMines(10, 0);
-	app.visualizeGrid();
-	app.listenForFlagState();
-	app.triggerRightClicks();
-});
 
 app.triggerRightClicks = () => {
 	document.querySelector(".mineField").addEventListener("contextmenu", app.rightClick);
 };
 
-app.rightClick = e => {
+app.rightClick = (e) => {
 	e.preventDefault();
-		const filterBy = e.target.getAttribute("data-position").split(",");
-		const targetTile = app.grid.filter((tile) => {
-			return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
-		});
-		// prevent revealed tiles being flagger
-		if (![...e.target.classList].includes("revealed")) {
-			app.markFlag(e, targetTile);
-		}
-}
+	const filterBy = e.target.getAttribute("data-position").split(",");
+	const targetTile = app.grid.filter((tile) => {
+		return tile.pos[0] == filterBy[0] && tile.pos[1] == filterBy[1];
+	});
+	// prevent revealed tiles being flagger
+	if (![...e.target.classList].includes("revealed")) {
+		app.markFlag(e, targetTile);
+	}
+};
 
 app.selectDifficulty = () => {
 	const difficulty = document.getElementsByClassName("difficulty");
@@ -315,10 +297,10 @@ app.selectDifficulty = () => {
 			const dataMod = dataRaw.map((number) => {
 				return parseInt(number);
 			});
-			const minefield = document.querySelector(".mineField")
+			const minefield = document.querySelector(".mineField");
 			minefield.innerHTML = "";
-			minefield.classList.remove('easy', 'medium', 'hard')
-			minefield.classList.add(e.target.innerHTML)
+			minefield.classList.remove("easy", "medium", "hard");
+			minefield.classList.add(e.target.innerHTML);
 			app.grid = [];
 			app.hidden = [];
 			app.mines = [];
@@ -331,7 +313,7 @@ app.selectDifficulty = () => {
 			app.visualizeGrid();
 			app.resetTimer();
 			app.triggerRightClicks();
-			flagButton.removeAttribute('disabled')
+			flagButton.removeAttribute("disabled");
 		});
 	}
 };
@@ -347,13 +329,7 @@ app.resetTimer = () => {
 	startTimer = setInterval(gameTimer, 1000);
 };
 
-
-
-// write win screen logic (stop timer, congratulate winner, show time idk)
-
-
-// style related javascript
-
+// toggle view between game and rules
 app.rulesToggle = () => {
 	const openRules = document.querySelector(".openRules");
 	const closeRules = document.querySelector(".closeRules");
@@ -377,3 +353,13 @@ app.toggleVisibility = (target) => {
 	target.classList.toggle("show");
 	target.classList.toggle("hide");
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+	app.rulesToggle();
+	app.selectDifficulty();
+	app.createGrid(9, 9);
+	app.placeMines(10, 0);
+	app.visualizeGrid();
+	app.listenForFlagState();
+	app.triggerRightClicks();
+});
