@@ -722,7 +722,7 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
     position: fixed;
     bottom: 0;
     left: 50%;
-    width: 100vw;
+    width: 100%;
     max-width: initial;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -778,7 +778,7 @@ button.nav:focus, .rulesContainer button.closeRules:focus {
     position: fixed;
     bottom: 0;
     left: 50%;
-    width: 100vw;
+    width: 100%;
     max-width: initial;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
