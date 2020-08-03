@@ -295,8 +295,10 @@ app.selectDifficulty = () => {
 			});
 			const minefield = document.querySelector(".mineField");
 			minefield.innerHTML = "";
-			minefield.classList.remove("easy", "medium", "hard");
-			minefield.classList.add(e.target.innerHTML);
+			app.applyDifficultyClasses(".mineField", e.target.innerHTML);
+			app.applyDifficultyClasses(".controls", e.target.innerHTML);
+			app.applyDifficultyClasses(".levelSelector", e.target.innerHTML);
+			app.applyDifficultyClasses("h1", e.target.innerHTML);
 			app.grid = [];
 			app.hidden = [];
 			app.mines = [];
@@ -312,6 +314,12 @@ app.selectDifficulty = () => {
 			flagButton.removeAttribute("disabled");
 		});
 	}
+};
+
+app.applyDifficultyClasses = (domNodeSelector, level) => {
+	const domNode = document.querySelector(domNodeSelector);
+	domNode.classList.remove("easy", "medium", "hard");
+	domNode.classList.add(level);
 };
 
 app.resetTimer = () => {
