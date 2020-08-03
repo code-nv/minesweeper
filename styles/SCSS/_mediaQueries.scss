@@ -45,7 +45,7 @@
 		top: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		background: #1F1F1F55;
+		background: #1f1f1f55;
 		width: 100%;
 		padding: 28px 0 5px;
 		box-shadow: inset 0px 0px 10px #0f180e;
@@ -61,7 +61,7 @@
 		}
 		.time.container,
 		.mines.container {
-			@include flexRow(space-between,baseline,nowrap);
+			@include flexRow(space-between, baseline, nowrap);
 			width: 85px;
 		}
 		.mines.container {
@@ -70,8 +70,18 @@
 	}
 
 	.levelSelector.hard {
-		// position: absolute;
-		// bottom:0;
+		position: fixed;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		max-width: initial;
+		transform: translateX(-50%);
+		background: #1f1f1f55;
+		box-shadow: inset 0px 0px 10px #0f180e;
+		justify-content: center;
+		button {
+			margin: 5px 10px;
+		}
 	}
 	.mineField {
 		&.easy {
@@ -82,7 +92,7 @@
 		}
 		&.hard {
 			grid-template-columns: repeat(19, 35px);
-			margin-top: 75px;
+			margin: 80px 0 50px;
 		}
 		.tile.hidden,
 		.tile.red,
@@ -98,24 +108,72 @@
 	}
 }
 
-@media (max-width: 500px) {
+@media (max-width: 510px) {
 	main {
 		width: auto;
 		padding: 0 10px;
 		box-shadow: none;
 	}
 
-	.levelSelector {
-		max-width: 500px;
-		margin: 0 auto;
+	h1.medium,
+	h1.easy {
+		display: none;
+	}
+
+	.levelSelector.medium,
+	.levelSelector.easy {
+		position: fixed;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		max-width: initial;
+		transform: translateX(-50%);
+		background: #1f1f1f55;
+		box-shadow: inset 0px 0px 10px #0f180e;
+		justify-content: center;
+		button {
+			margin: 5px 10px;
+		}
+	}
+
+	.controls.medium,
+	.controls.easy {
+		position: fixed;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		background: #1f1f1f55;
+		width: 100%;
+		padding: 28px 0 5px;
+		box-shadow: inset 0px 0px 10px #0f180e;
+
+		&::before {
+			content: "Minesweeper";
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			top: 2px;
+			font-size: 1.2rem;
+			color: $mainFont;
+		}
+		.time.container,
+		.mines.container {
+			@include flexRow(space-between, baseline, nowrap);
+			width: 85px;
+		}
+		.mines.container {
+			flex-direction: row-reverse;
+		}
 	}
 
 	.mineField {
 		&.easy {
 			grid-template-columns: repeat(9, 40px);
+			margin: 80px 0 50px;
 		}
 		&.medium {
 			grid-template-columns: repeat(14, 40px);
+			margin: 80px 0 50px;
 		}
 		&.hard {
 			grid-template-columns: repeat(19, 40px);

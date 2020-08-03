@@ -37,6 +37,7 @@ main {
 			background: $primaryLight;
 			box-shadow: inset 3px 3px 7px #4c6750, inset -3px -3px 7px #94c79a;
 			border: 1px solid darken($primaryLight, 10%);
+			min-width: 30px;
 		}
 	}
 }
@@ -98,18 +99,12 @@ button.nav {
 
 	&.easy {
 		grid-template-columns: repeat(9, 25px);
-		// width: 225px;
-		// height: 225px;
 	}
 	&.medium {
 		grid-template-columns: repeat(14, 25px);
-		// width: 350px;
-		// height: 375px;
 	}
 	&.hard {
 		grid-template-columns: repeat(19, 25px);
-		// width: 475px;
-		// height: 625px;
 	}
 
 	li {
